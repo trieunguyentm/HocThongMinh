@@ -1,0 +1,7 @@
+.container-course {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* Chiều cao tùy ý, bạn có thể điều chỉnh */
+}

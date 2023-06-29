@@ -1,0 +1,61 @@
+.card-course-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    /* Số dòng tối đa muốn hiển thị */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+#btn-course-6:hover {
+    background-color: #009D9D;
+    border: 0;
+}
+
+#btn-course-6:hover #text-6 {
+    color: white !important;
+}
+
+#btn-course-6:hover #icon-6 {
+    color: white !important;
+}
+
+#btn-course-7:hover {
+    background-color: rgb(85, 187, 126);
+    border: 0;
+}
+
+#btn-course-7:hover #text-7 {
+    color: white !important;
+}
+
+#btn-course-7:hover #icon-7 {
+    color: white !important;
+}
+
+#btn-course-8:hover {
+    background-color: rgb(245, 183, 61);
+    border: 0;
+}
+
+#btn-course-8:hover #text-8 {
+    color: white !important;
+}
+
+#btn-course-8:hover #icon-8 {
+    color: white !important;
+}
+
+#btn-course-9:hover {
+    background-color: rgb(245, 183, 61);
+    border: 0;
+}
+
+#btn-course-9:hover #text-9 {
+    color: white !important;
+}
+
+#btn-course-9:hover #icon-9 {
+    color: white !important;
+}

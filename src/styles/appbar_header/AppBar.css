@@ -1,0 +1,60 @@
+.appbar-header {
+    height: 57px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.left-appbar-header {
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    vertical-align: middle;
+    width: 200px;
+    height: 42px;
+    height: auto;
+    position: relative;
+}
+
+.right-appbar-header {
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.button-appbar-header {
+    background-color: orange !important;
+    padding: 4px 18px !important;
+    margin-left: 10px !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    white-space: nowrap !important;
+    transition: transform 0.5s !important;
+    border-radius: 10px !important;
+}
+
+.button-appbar-header:hover {
+    transform: translateY(-6px) !important;
+}
+
+@media screen and (max-width: 448px) {
+    .logo {
+        width: 150px;
+        height: 42px;
+    }
+
+    .button-appbar-header {
+        padding: 3px 10px !important;
+        margin-left: 7px !important;
+        font-size: 8px !important;
+    }
+}
+
+@media screen and (max-width: 325px) {
+    .appbar-header {
+        justify-content: space-between !important;
+    }
+}
