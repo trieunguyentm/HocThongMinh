@@ -7,6 +7,15 @@
     text-overflow: ellipsis;
 }
 
+.card-course-zoom {
+    transition: transform 0.5s ease !important;
+}
+
+.card-course-zoom:hover {
+    transform: scale(1.1) !important;
+    /* Kích thước zoom, tùy chỉnh nếu cần */
+}
+
 
 #btn-course-6:hover {
     background-color: #009D9D;
@@ -57,5 +66,44 @@
 }
 
 #btn-course-9:hover #icon-9 {
+    color: white !important;
+}
+
+#btn-course-10:hover {
+    background-color: rgb(61, 179, 218);
+    border: 0;
+}
+
+#btn-course-10:hover #text-10 {
+    color: white !important;
+}
+
+#btn-course-10:hover #icon-10 {
+    color: white !important;
+}
+
+#btn-course-11:hover {
+    background-color: rgb(142, 145, 229);
+    border: 0;
+}
+
+#btn-course-11:hover #text-11 {
+    color: white !important;
+}
+
+#btn-course-11:hover #icon-11 {
+    color: white !important;
+}
+
+#btn-course-12:hover {
+    background-color: rgb(218, 135, 145);
+    border: 0;
+}
+
+#btn-course-12:hover #text-12 {
+    color: white !important;
+}
+
+#btn-course-12:hover #icon-12 {
     color: white !important;
 }
