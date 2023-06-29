@@ -34,7 +34,7 @@ export default function CategoryCourse() {
                     {
                         arrIndexTHCS.map((itemArr, indexArr) => {
                             return (
-                                <Grid item xs={6} sm={6} md={3}>
+                                <Grid item xs={6} sm={6} md={3} key={itemArr}>
                                     <CardCourse
                                         altImg={arrAltImgTHCS[itemArr - 6]}
                                         linkImg={arrLinkImgTHCS[itemArr - 6]}
@@ -53,7 +53,7 @@ export default function CategoryCourse() {
                     {
                         arrIndexTHPT.map((itemArr, indexArr) => {
                             return (
-                                <Grid item xs={6} sm={6} md={3}>
+                                <Grid item xs={6} sm={6} md={3} key={itemArr}>
                                     <CardCourse
                                         altImg={arrAltImgTHPT[itemArr - 10]}
                                         linkImg={arrLinkImgTHPT[itemArr - 10]}

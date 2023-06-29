@@ -3,7 +3,14 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import '../../styles/category_course/CardCourse.css'
 
 export default function CardCourse({ altImg, linkImg, describe, index }) {
-    const colorImg = ["#009D9D", "rgb(85, 187, 126)", "rgb(245, 183, 61)", "rgb(245, 133, 81)", "rgb(61, 179, 218)", "rgb(142, 145, 229)", "rgb(218, 135, 145)"];
+    const colorImg = ["#009D9D",
+        "rgb(85, 187, 126)",
+        "rgb(245, 183, 61)",
+        "rgb(245, 133, 81)",
+        "rgb(61, 179, 218)",
+        "rgb(142, 145, 229)",
+        "rgb(218, 135, 145)"
+    ];
 
     return (
         <>
