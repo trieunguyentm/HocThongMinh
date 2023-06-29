@@ -3,7 +3,7 @@ import Banner from "./components/banner/Banner";
 import CategoryCourse from "./components/category_course/CategoryCourse";
 import CategoryTest from "./components/category_test/CategoryTest";
 import NavBar from "./components/navbar_header/NavBar";
-
+import './App.css'
 function App() {
   return (
     <>
