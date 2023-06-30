@@ -1,12 +1,3 @@
-.card-course-description {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
-    /* Số dòng tối đa muốn hiển thị */
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 .card-course-zoom {
     transition: transform 0.5s ease !important;
 }
@@ -16,6 +7,14 @@
     /* Kích thước zoom, tùy chỉnh nếu cần */
 }
 
+.card-course-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    /* Số dòng tối đa muốn hiển thị */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 #btn-course-6:hover {
     background-color: #009D9D;

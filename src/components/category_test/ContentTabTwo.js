@@ -1,0 +1,27 @@
+import { Grid } from "@mui/material"
+import CategoryTestLink from "./CategoryTestLink"
+
+export default function ContentTabTwo() {
+    const arrName = ["Tiếng Anh", "Toán", "Vật Lý",
+        "Hóa Học", "Sinh Học", "Lịch Sử",
+        "Địa Lý", "Ngữ Văn", "Giáo Dục Công Dân"];
+
+    return (
+        <>
+            <p>Luyện thi THPT QG các môn Toán, Lý, Hóa, Sinh, Sử, Địa, Giáo Dục Công Dân, Tiếng Anh với đề thi chọn lọc từ các trường và những dạng bài thi bám sát với chương trình thi đại học.</p>
+            <Grid container spacing={2}>
+                {
+                    arrName.map((itemArr, indexArr) => {
+                        return (
+                            <Grid item xs={12} sm={6} md={4} key={indexArr}>
+                                <CategoryTestLink
+                                    name={itemArr}
+                                />
+                            </Grid>
+                        )
+                    })
+                }
+            </Grid>
+        </>
+    )
+}
