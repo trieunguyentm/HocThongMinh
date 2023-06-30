@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material";
 import CategoryTestLink from "./CategoryTestLink";
+import AnimationsZoom from "../../animations/AnimationsZoom";
 
 export default function ContentTabOne() {
     const arrName = ["Đề Thi ĐGNL ĐHQG Hà Nội",
@@ -10,7 +11,9 @@ export default function ContentTabOne() {
 
     return (
         <>
-            <p>Tổng hợp mẫu các dạng đề thi đánh giá năng lực dưới dạng trắc nghiệm online của các trường với ngân hàng câu hỏi và đề thi lớn giúp bạn chuẩn bị tốt cho kì thi ĐGNL.</p>
+            <AnimationsZoom elementID={"category-information-1"}>
+                <p id="category-information-1">Tổng hợp mẫu các dạng đề thi đánh giá năng lực dưới dạng trắc nghiệm online của các trường với ngân hàng câu hỏi và đề thi lớn giúp bạn chuẩn bị tốt cho kì thi ĐGNL.</p>
+            </AnimationsZoom>
             <Grid container spacing={2}>
                 {
                     arrName.map((itemArr, indexArr) => {

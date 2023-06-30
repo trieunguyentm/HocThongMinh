@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material"
 import CategoryTestLink from "./CategoryTestLink"
+import AnimationsZoom from "../../animations/AnimationsZoom";
 
 export default function ContentTabTwo() {
     const arrName = ["Tiếng Anh", "Toán", "Vật Lý",
@@ -8,7 +9,9 @@ export default function ContentTabTwo() {
 
     return (
         <>
-            <p>Luyện thi THPT QG các môn Toán, Lý, Hóa, Sinh, Sử, Địa, Giáo Dục Công Dân, Tiếng Anh với đề thi chọn lọc từ các trường và những dạng bài thi bám sát với chương trình thi đại học.</p>
+            <AnimationsZoom elementID={"category-information-2"}>
+                <p id="category-information-2">Luyện thi THPT QG các môn Toán, Lý, Hóa, Sinh, Sử, Địa, Giáo Dục Công Dân, Tiếng Anh với đề thi chọn lọc từ các trường và những dạng bài thi bám sát với chương trình thi đại học.</p>
+            </AnimationsZoom>
             <Grid container spacing={2}>
                 {
                     arrName.map((itemArr, indexArr) => {

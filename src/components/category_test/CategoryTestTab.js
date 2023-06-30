@@ -6,6 +6,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import ContentTabOne from './ContentTabOne';
 import ContentTabTwo from './ContentTabTwo';
+import AnimationsFadeTop from '../../animations/AnimationsFadeTop';
 
 export default function CategoryTestTab() {
     const [value, setValue] = React.useState('1');
@@ -18,23 +19,26 @@ export default function CategoryTestTab() {
         <Box sx={{ width: '100%', typography: 'body1' }}>
             <TabContext value={value}>
                 <Box>
-                    <TabList
-                        centered
-                        onChange={handleChange}
-                        aria-label="tab-category-test"
-                        sx={{ color: '#009D9D' }}
-                        textColor='inherit'
-                        TabIndicatorProps={{
-                            style: {
-                                backgroundColor: '#009D9D',
-                                border: '2px solid',
-                            },
-                        }}
+                    <AnimationsFadeTop elementID={"category-test-tablist"}>
+                        <TabList
+                            id="category-test-tablist"
+                            centered
+                            onChange={handleChange}
+                            aria-label="tab-category-test"
+                            sx={{ color: '#009D9D' }}
+                            textColor='inherit'
+                            TabIndicatorProps={{
+                                style: {
+                                    backgroundColor: '#009D9D',
+                                    border: '2px solid',
+                                },
+                            }}
 
-                    >
-                        <Tab label="Đề thi ĐGNL" value="1" sx={{ fontWeight: 'bold', fontSize: '24px' }} />
-                        <Tab label="Luyện thi THPT" value="2" sx={{ fontWeight: 'bold', fontSize: '24px' }} />
-                    </TabList>
+                        >
+                            <Tab label="Đề thi ĐGNL" value="1" sx={{ fontWeight: 'bold', fontSize: '24px' }} />
+                            <Tab label="Luyện thi THPT" value="2" sx={{ fontWeight: 'bold', fontSize: '24px' }} />
+                        </TabList>
+                    </AnimationsFadeTop>
                 </Box>
                 <TabPanel value="1"><ContentTabOne /></TabPanel>
                 <TabPanel value="2"><ContentTabTwo /></TabPanel>
