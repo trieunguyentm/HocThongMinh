@@ -5,6 +5,7 @@ import CategoryTest from "./components/category_test/CategoryTest";
 import NavBar from "./components/navbar_header/NavBar";
 import './App.css'
 import HomeUtils from "./components/home_utils/HomeUtils";
+import HomeBase from "./components/home_base/HomeBase";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <CategoryCourse />
       <CategoryTest />
       <HomeUtils />
+      <HomeBase />
     </>
   );
 }

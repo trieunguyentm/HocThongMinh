@@ -2,6 +2,7 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import CardHomeUtils from './CardHomeUtils';
+import { useMediaQuery } from '@mui/material';
 // import required modules
 
 const SwiperHomeUtils = () => {
@@ -23,13 +24,19 @@ const SwiperHomeUtils = () => {
         "Rèn luyện tư duy với các bài kiểm tra trắc nghiệm online",
     ]
 
+    // Sử dụng useMediaQuery để kiểm tra kích thước màn hình
+    const isSmallScreen = useMediaQuery('(max-width: 750px)');
+
+    // Đặt số slide hiển thị tương ứng với kích thước màn hình
+    const slidesPerView = isSmallScreen ? 1 : 3;
+
     return (
         <div
             className="swiper-home-utils"
             style={{ position: 'relative', top: '-360px' }}
         >
             <Swiper
-                slidesPerView={3}
+                slidesPerView={slidesPerView}
                 spaceBetween={30}
                 loop={true}
             >

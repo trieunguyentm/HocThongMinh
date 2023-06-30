@@ -1,0 +1,11 @@
+.home-base {
+    text-align: center;
+    background: #fff url("https://hocthongminh.com/images/brick-wall.png") no-repeat 100%;
+    background-size: cover;
+    padding: 40px 0;
+}
+
+.item-infor-home-base {
+    display: block;
+    text-align: center;
+}

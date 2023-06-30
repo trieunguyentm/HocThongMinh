@@ -1,11 +1,17 @@
+import AnimationsZoom from '../../animations/AnimationsZoom'
 import '../../styles/home_utils/HomeUtils.css'
 import SwiperHomeUtils from './SwiperHomeUtils'
 
 export default function HomeUtils() {
     return (
         <div className="home-utils">
-            <div className="home-utils-title">Lợi ích</div>
-            <div className="home-utils-title-temp">Phương pháp phát triển khả năng tự học của Học Thông Minh</div>
+            <AnimationsZoom elementID={"home-utils-obj"}>
+                <div id="home-utils-obj">
+                    <div className="home-utils-title">Lợi ích</div>
+                    <div className="home-utils-title-temp">Phương pháp phát triển khả năng tự học của Học Thông Minh</div>
+                </div>
+            </AnimationsZoom>
+
             <div className="home-utils-body">
                 <div className='home-utils-image' >
                     <img

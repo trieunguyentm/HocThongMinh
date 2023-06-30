@@ -9,7 +9,7 @@ export default function CardHomeUtils({ srcImg, text }) {
                 position: 'relative',
             }}
         >
-            <div className='container-card-home-utils' style={{ width: '60%' }}>
+            <div className='container-card-home-utils' style={{ width: '50%' }}>
                 <div className='container-img-home-utils'>
                     <div className='div-img-home-utils'>
                         <img
