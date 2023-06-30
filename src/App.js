@@ -4,6 +4,8 @@ import CategoryCourse from "./components/category_course/CategoryCourse";
 import CategoryTest from "./components/category_test/CategoryTest";
 import NavBar from "./components/navbar_header/NavBar";
 import './App.css'
+import HomeUtils from "./components/home_utils/HomeUtils";
+
 function App() {
   return (
     <>
@@ -12,6 +14,7 @@ function App() {
       <Banner />
       <CategoryCourse />
       <CategoryTest />
+      <HomeUtils />
     </>
   );
 }

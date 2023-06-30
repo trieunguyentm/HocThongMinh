@@ -1,0 +1,22 @@
+.container-img-home-utils {
+    display: flex;
+    justify-content: center;
+    z-index: 999;
+}
+
+.div-img-home-utils {
+    display: flex;
+    justify-content: center;
+    width: 134px;
+    height: 140px;
+}
+
+.container-text-home-utils {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.div-text-home-utils {
+    text-align: center;
+}

@@ -27,7 +27,7 @@ const AnimationsZoom = ({ children, elementID }) => {
 
     return (
         <Zoom
-            duration={1000}
+            duration={2000}
             when={isVisible}
         >
             {children}
