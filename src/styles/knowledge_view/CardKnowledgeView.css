@@ -1,0 +1,43 @@
+.card-knowledge-title {
+    font-weight: bold;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /* Số dòng tối đa muốn hiển thị */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 5px;
+}
+
+.card-knowledge-content {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    /* Số dòng tối đa muốn hiển thị */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 5px;
+    font-size: 14px;
+}
+
+.card-knowledge {
+    width: 100%;
+    margin: 10px;
+    border-radius: 20px;
+    transition: all 1.0s !important;
+    ;
+    cursor: pointer;
+}
+
+.card-knowledge:hover {
+    transform: scale(1.2);
+}
+
+.card-media-knowledge {
+    transition: all 0.5s;
+    overflow: hidden;
+}
+
+.card-media-knowledge:hover {
+    transform: scale(1.1);
+}

@@ -1,0 +1,51 @@
+.container-card-home-feedback {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
+.card-home-feedback {
+    display: block;
+    position: relative;
+
+}
+
+.card-icon-home-feedback {
+    position: absolute;
+    left: -50px;
+    top: -50px;
+}
+
+.card-media-home-feedback {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-name-home-feedback {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.card-rating-home-feedback {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-content-home-feedback {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    /* Số dòng tối đa muốn hiển thị */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
