@@ -33,33 +33,33 @@ export default function KnowledgeView() {
                     </AnimationsZoom>
                 </div>
                 <div className='knowledge-view-card-content'>
-                    <AnimationsZoom elementID="grid-container-knowledge">
-                        <div id="grid-container-knowledge">
-                            <Grid
-                                container
-                                spacing={10}
-                                style={{ display: 'flex', justifyContent: 'center' }}
-                            >
-                                {
-                                    arrLinkImg.map((linkImg, index) => {
-                                        return (
-                                            <Grid item xs={12}
-                                                sm={12}
-                                                md={3}
-                                                key={index}
-                                            >
-                                                <CardKnowledgeView
-                                                    linkImg={linkImg}
-                                                    title={arrTitle[index]}
-                                                    content={arrContent[index]}
-                                                />
-                                            </Grid>
-                                        )
-                                    })
-                                }
-                            </Grid>
-                        </div>
-                    </AnimationsZoom>
+                    {/* <AnimationsZoom elementID="grid-container-knowledge"> */}
+                    <div id="grid-container-knowledge">
+                        <Grid
+                            container
+                            spacing={10}
+                            style={{ display: 'flex', justifyContent: 'center' }}
+                        >
+                            {
+                                arrLinkImg.map((linkImg, index) => {
+                                    return (
+                                        <Grid item xs={12}
+                                            sm={12}
+                                            md={3}
+                                            key={index}
+                                        >
+                                            <CardKnowledgeView
+                                                linkImg={linkImg}
+                                                title={arrTitle[index]}
+                                                content={arrContent[index]}
+                                            />
+                                        </Grid>
+                                    )
+                                })
+                            }
+                        </Grid>
+                    </div>
+                    {/* </AnimationsZoom> */}
                 </div>
             </div>
         </div>

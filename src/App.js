@@ -8,6 +8,7 @@ import HomeUtils from "./components/home_utils/HomeUtils";
 import HomeBase from "./components/home_base/HomeBase";
 import HomeFeedBack from "./components/home_feedback/HomeFeedBack";
 import KnowledgeView from './components/knowledge_view/KnowledgeView';
+import Footer from './components/footer/Footer';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <HomeBase />
       <HomeFeedBack />
       <KnowledgeView />
+      <Footer />
     </>
   );
 }

@@ -1,0 +1,105 @@
+.footer {
+    margin: 50px 20px 0 20px;
+    display: flex;
+    justify-content: center;
+    background-color: #d2e6e9;
+}
+
+#logo-hocthongminh {
+    height: 42px;
+    object-fit: cover;
+}
+
+.footer-hocthongminh {
+    display: block;
+    max-width: 20%;
+    margin: 10px
+}
+
+.info-hocthongminh {
+    display: flex;
+    margin: 10px;
+}
+
+.diachi-hocthongminh,
+.coquanchuquan-hocthongminh,
+.hotro-hocthongminh {
+    margin: 30px 0;
+}
+
+.vechungtoi-hocthongminh {
+    display: block;
+    margin: 0 20px;
+    max-width: 25%;
+}
+
+.chinhsach-hocthongminh {
+    display: block;
+    margin: 0 20px;
+    max-width: 20%;
+}
+
+.thongtin-hocthongminh {
+    display: block;
+    margin: 0 20px;
+    max-width: 30%;
+}
+
+.ketnoi-hocthongminh {
+    display: block;
+    margin: 10px 20px;
+    max-width: 10%;
+}
+
+.icon-hocthongminh a {
+    margin: 2px;
+}
+
+@media screen and (max-width: 950px) {
+    .footer {
+        display: block;
+    }
+
+    .footer-hocthongminh {
+        max-width: 100%;
+    }
+
+    .info-hocthongminh {
+        max-width: 100%;
+    }
+
+    .ketnoi-hocthongminh {
+        max-width: 100%;
+    }
+
+    .vechungtoi-hocthongminh {
+        max-width: 100%;
+    }
+
+    .chinhsach-hocthongminh {
+        max-width: 100%;
+    }
+
+    .thongtin-hocthongminh {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .info-hocthongminh {
+        display: block;
+        max-width: 100%;
+    }
+
+    .vechungtoi-hocthongminh {
+        max-width: 100%;
+    }
+
+    .chinhsach-hocthongminh {
+        max-width: 100%;
+    }
+
+    .thongtin-hocthongminh {
+        max-width: 100%;
+    }
+}
