@@ -1,30 +1,24 @@
 import './App.css'
-import AppBar from "./components/appbar_header/AppBar";
-import Banner from "./components/banner/Banner";
-import CategoryCourse from "./components/category_course/CategoryCourse";
-import CategoryTest from "./components/category_test/CategoryTest";
-import NavBar from "./components/navbar_header/NavBar";
-import HomeUtils from "./components/home_utils/HomeUtils";
-import HomeBase from "./components/home_base/HomeBase";
-import HomeFeedBack from "./components/home_feedback/HomeFeedBack";
-import KnowledgeView from './components/knowledge_view/KnowledgeView';
-import Footer from './components/footer/Footer';
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import ClassPage from "./pages/ClassPage";
 
-function App() {
-  return (
-    <>
-      <AppBar />
-      <NavBar />
-      <Banner />
-      <CategoryCourse />
-      <CategoryTest />
-      <HomeUtils />
-      <HomeBase />
-      <HomeFeedBack />
-      <KnowledgeView />
-      <Footer />
-    </>
-  );
+export default function App() {
+    return (
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/lop-6" element={<ClassPage classPage="6" />} />
+                    <Route path="/lop-7" element={<ClassPage classPage="7" />} />
+                    <Route path="/lop-8" element={<ClassPage classPage="8" />} />
+                    <Route path="/lop-9" element={<ClassPage classPage="9" />} />
+                    <Route path="/lop-10" element={<ClassPage classPage="10" />} />
+                    <Route path="/lop-11" element={<ClassPage classPage="11" />} />
+                    <Route path="/lop-12" element={<ClassPage classPage="12" />} />
+                    <Route path="*" element={<Navigate replace to="/" />} />
+                </Routes>
+            </BrowserRouter>
+        </>
+    )
 }
-
-export default App;

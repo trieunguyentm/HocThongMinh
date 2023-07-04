@@ -5,6 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ListButton from "./ListButton";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
     const pages = ["Luyện thi THPTQG", "THCS", "THPT", "Đề thi ĐGNL", "Tài liệu", "Kiến thức", "Thi đấu"];
@@ -18,6 +19,7 @@ export default function NavBar() {
     const openTHPT = Boolean(anchorElTHPT);
     const [openSmallTHCS, setOpenSmallTHCS] = useState(false);
     const [openSmallTHPT, setOpenSmallTHPT] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Lấy tất cả các button có className là "button-nav"
@@ -191,11 +193,18 @@ export default function NavBar() {
                             onClose={handleCloseTHCS}
                         >
                             {
-                                THCS.map((item) => {
+                                THCS.map((item, index) => {
+                                    const handleClick = () => {
+                                        // console.log('clicked');
+                                        // console.log(item);
+                                        const nameClass = item.split(" ")[1];
+                                        navigate(`/lop-${nameClass}`);
+                                    };
+
                                     return (
-                                        <MenuItem onClick={handleCloseTHCS} key={item}>
+                                        <MenuItem onClick={handleClick} key={index}>
                                             <Button
-                                                sx={{ my: 2, color: 'black', margin: '2px' }}
+                                                sx={{ my: 0, color: 'black', margin: '2px' }}
                                             >
                                                 {item}
                                             </Button>
@@ -212,8 +221,14 @@ export default function NavBar() {
                         >
                             {
                                 THPT.map((item) => {
+                                    const handleClick = () => {
+                                        // console.log('clicked');
+                                        // console.log(item);
+                                        const nameClass = item.split(" ")[1];
+                                        navigate(`/lop-${nameClass}`);
+                                    }
                                     return (
-                                        <MenuItem onClick={handleCloseTHPT} key={item}>
+                                        <MenuItem onClick={handleClick} key={item}>
                                             <Button
                                                 sx={{ my: 2, color: 'black', margin: '2px' }}
                                             >
@@ -227,6 +242,6 @@ export default function NavBar() {
                     </Toolbar>
                 </Container>
             </AppBar>
-        </div>
+        </div >
     )
 }
