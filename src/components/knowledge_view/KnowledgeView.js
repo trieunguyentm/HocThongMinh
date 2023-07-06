@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import '../../styles/knowledge_view/KnowledgeView.css'
 import CardKnowledgeView from './CardKnowledgeView';
-import AnimationsZoom from '../../animations/AnimationsZoom'
+// import AnimationsZoom from '../../animations/AnimationsZoom'
 
 export default function KnowledgeView() {
     const arrLinkImg = [
@@ -28,9 +28,9 @@ export default function KnowledgeView() {
             <div className='knowledge-view-content'>
 
                 <div className="knowledge-view-title" id='knowlegde-view-title'>
-                    <AnimationsZoom elementID="title-knowledge">
-                        <h1 id="title-knowledge">Kiến thức hay</h1>
-                    </AnimationsZoom>
+                    {/* <AnimationsZoom elementID="title-knowledge"> */}
+                    <h1 id="title-knowledge">Kiến thức hay</h1>
+                    {/* </AnimationsZoom> */}
                 </div>
                 <div className='knowledge-view-card-content'>
                     {/* <AnimationsZoom elementID="grid-container-knowledge"> */}

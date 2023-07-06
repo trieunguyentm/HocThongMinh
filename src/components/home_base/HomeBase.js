@@ -1,15 +1,18 @@
 import { Grid } from '@mui/material'
 import '../../styles/home_base/HomeBase.css'
-import AnimationsZoom from '../../animations/AnimationsZoom'
+// import AnimationsZoom from '../../animations/AnimationsZoom'
 
 export default function HomeBase() {
     return (
         <>
 
             <div className="home-base" id="home-base">
-                <AnimationsZoom elementID={"home-base"}>
+                {/* <AnimationsZoom elementID={"home-base"}> */}
+                <div data-aos="zoom-in" data-aos-duration="1500">
                     <h1>Nền tảng Học Thông Minh có gì?</h1>
-                </AnimationsZoom>
+                </div>
+
+                {/* </AnimationsZoom> */}
 
                 <div className="infor-home-base">
                     <Grid

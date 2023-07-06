@@ -13,7 +13,7 @@ export default function CardCourse({ altImg, linkImg, describe, index }) {
     ];
 
     return (
-        <>
+        <div data-aos="zoom-in-up" data-aos-duration="1500">
             <Card sx={{ maxWidth: 250 }} className="card-course-zoom">
                 <CardMedia
                     component="img"
@@ -42,6 +42,6 @@ export default function CardCourse({ altImg, linkImg, describe, index }) {
                     </Button>
                 </CardActions >
             </Card >
-        </>
+        </div>
     )
 }

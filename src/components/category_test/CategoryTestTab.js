@@ -6,7 +6,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import ContentTabOne from './ContentTabOne';
 import ContentTabTwo from './ContentTabTwo';
-import AnimationsFadeTop from '../../animations/AnimationsFadeTop';
+// import AnimationsFadeTop from '../../animations/AnimationsFadeTop';
 
 export default function CategoryTestTab() {
     const [value, setValue] = React.useState('1');
@@ -19,7 +19,8 @@ export default function CategoryTestTab() {
         <Box sx={{ width: '100%', typography: 'body1' }}>
             <TabContext value={value}>
                 <Box>
-                    <AnimationsFadeTop elementID={"category-test-tablist"}>
+                    {/* <AnimationsFadeTop elementID={"category-test-tablist"}> */}
+                    <div data-aos="fade-down" data-aos-duration="1500">
                         <TabList
                             id="category-test-tablist"
                             centered
@@ -38,7 +39,8 @@ export default function CategoryTestTab() {
                             <Tab label="Đề thi ĐGNL" value="1" sx={{ fontWeight: 'bold', fontSize: '24px' }} />
                             <Tab label="Luyện thi THPT" value="2" sx={{ fontWeight: 'bold', fontSize: '24px' }} />
                         </TabList>
-                    </AnimationsFadeTop>
+                    </div>
+                    {/* </AnimationsFadeTop> */}
                 </Box>
                 <TabPanel value="1"><ContentTabOne /></TabPanel>
                 <TabPanel value="2"><ContentTabTwo /></TabPanel>

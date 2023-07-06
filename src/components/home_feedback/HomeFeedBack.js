@@ -4,7 +4,7 @@ import CardHomeFeedBack from "./CardHomeFeedBack";
 import '../../styles/home_feedback/HomeFeedBack.css'
 import { useState } from "react";
 import { useMediaQuery } from "@mui/material";
-import AnimationsFadeTop from "../../animations/AnimationsFadeTop";
+// import AnimationsFadeTop from "../../animations/AnimationsFadeTop";
 
 export default function HomeFeedBack() {
     const arrLinkImg =
@@ -51,9 +51,11 @@ export default function HomeFeedBack() {
 
     return (
         <div className="home-feedback">
-            <AnimationsFadeTop elementID={"home-feedback-title"}>
+            {/* <AnimationsFadeTop elementID={"home-feedback-title"}> */}
+            <div data-aos="zoom-in" data-aos-duration="1500">
                 <h1 style={{ textAlign: "center" }} id="home-feedback-title">Mọi người nghĩ gì về chúng tôi</h1>
-            </AnimationsFadeTop>
+            </div>
+            {/* </AnimationsFadeTop> */}
             <div className="home-feedback-slide" style={{ height: '100%' }}>
                 <Swiper
                     style={{ height: '100%' }}
