@@ -1,5 +1,5 @@
 import { Container } from '@mui/system'
-import '../../styles/category_test/CategoryTest.css'
+import './styles.css'
 import CategoryTestTab from './CategoryTestTab'
 
 export default function CategoryTest() {

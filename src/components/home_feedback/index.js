@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import CardHomeFeedBack from "./CardHomeFeedBack";
-import '../../styles/home_feedback/HomeFeedBack.css'
+import './styles.css'
 import { useState } from "react";
 import { useMediaQuery } from "@mui/material";
 // import AnimationsFadeTop from "../../animations/AnimationsFadeTop";

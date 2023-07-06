@@ -1,5 +1,5 @@
 // import AnimationsZoom from '../../animations/AnimationsZoom'
-import '../../styles/home_utils/HomeUtils.css'
+import './styles.css'
 import SwiperHomeUtils from './SwiperHomeUtils'
 
 export default function HomeUtils() {

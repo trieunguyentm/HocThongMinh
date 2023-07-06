@@ -1,4 +1,4 @@
-import '../../styles/category_course/TitleCategory.css'
+import './styles.css'
 
 export default function TitleCategory() {
     return (

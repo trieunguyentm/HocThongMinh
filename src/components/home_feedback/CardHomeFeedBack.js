@@ -1,5 +1,5 @@
 import { CardContent, CardMedia, Rating, Typography } from "@mui/material";
-import '../../styles/home_feedback/CardHomeFeedBack.css'
+import './styles.css'
 
 export default function CardHomeFeedBack({ linkImg, name, rating, content, hightLight }) {
 

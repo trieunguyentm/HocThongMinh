@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar } from "@mui/material";
-import '../../styles/navbar_header/NavBar.css'
+import './styles.css'
 import MenuIcon from '@mui/icons-material/Menu';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';

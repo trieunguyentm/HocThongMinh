@@ -1,0 +1,29 @@
+/* Category test */
+.category-test {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background: url("https://hocthongminh.com/images/event_bg_bottom.png") no-repeat 50%;
+    background-size: cover;
+    padding-top: 40px;
+    padding-bottom: 120px;
+}
+
+.category-test-container {
+    padding: 0 24px;
+}
+
+/* Category test link */
+.category-test-link-btn {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background-color: #f6faff !important;
+    padding: 15px !important;
+}
+
+.category-test-link-btn:hover {
+    color: #f6faff !important;
+    background-color: #009D9D !important;
+}

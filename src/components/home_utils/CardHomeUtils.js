@@ -1,4 +1,4 @@
-import '../../styles/home_utils/CardHomeUtils.css'
+import './styles.css'
 
 export default function CardHomeUtils({ srcImg, text }) {
     return (

@@ -1,5 +1,5 @@
 import { Card, CardMedia } from "@mui/material";
-import '../../styles/knowledge_view/CardKnowledgeView.css'
+import './styles.css'
 
 export default function CardKnowledgeView({ linkImg, title, content }) {
     return (

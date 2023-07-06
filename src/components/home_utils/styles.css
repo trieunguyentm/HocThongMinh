@@ -1,0 +1,50 @@
+/* Home Utils */
+.home-utils {
+    text-align: center;
+    padding-top: 200px;
+}
+
+.home-utils-body {
+    margin-top: 40px;
+}
+
+.home-utils-title {
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+    margin-top: 40px;
+}
+
+.home-utils-title-temp {
+    font-weight: 600;
+    font-size: 24px;
+    color: #575757;
+}
+
+.home-utils-body {
+    padding-bottom: 40px;
+}
+
+/* Card home utils */
+.container-img-home-utils {
+    display: flex;
+    justify-content: center;
+    z-index: 999;
+}
+
+.div-img-home-utils {
+    display: flex;
+    justify-content: center;
+    width: 134px;
+    height: 140px;
+}
+
+.container-text-home-utils {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.div-text-home-utils {
+    text-align: center;
+}

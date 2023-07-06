@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import '../../styles/knowledge_view/KnowledgeView.css'
+import './styles.css'
 import CardKnowledgeView from './CardKnowledgeView';
 // import AnimationsZoom from '../../animations/AnimationsZoom'
 

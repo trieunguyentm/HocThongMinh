@@ -1,4 +1,4 @@
-import '../../styles/footer/Footer.css'
+import './styles.css'
 import PlaceIcon from '@mui/icons-material/Place';
 import EmailIcon from '@mui/icons-material/Email';
 

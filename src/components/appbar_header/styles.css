@@ -1,8 +1,14 @@
 .appbar-header {
-    height: 57px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-around;
+}
+
+@media screen and (max-width: 1444px) {
+    .appbar-header {
+        height: 57px;
+    }
 }
 
 .left-appbar-header {
@@ -13,10 +19,18 @@
 
 .logo {
     vertical-align: middle;
-    width: 200px;
-    height: 42px;
+    width: 286px;
+    /* height: 60px; */
     height: auto;
     position: relative;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1444px) {
+    .logo {
+        width: 200px;
+        height: 42px;
+    }
 }
 
 .right-appbar-header {
@@ -27,13 +41,16 @@
 
 .button-appbar-header {
     background-color: orange !important;
-    padding: 4px 18px !important;
+    /* padding: 4px 18px !important; */
     margin-left: 10px !important;
-    font-size: 12px !important;
+    font-size: 13px !important;
     font-weight: bold !important;
     white-space: nowrap !important;
     transition: transform 0.5s !important;
     border-radius: 10px !important;
+    text-transform: capitalize !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
 }
 
 .button-appbar-header:hover {

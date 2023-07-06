@@ -1,3 +1,29 @@
+/* Know ledge view */
+.knowledge-view {
+    display: block;
+    margin: 0;
+}
+
+.knowledge-view-content {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.knowledge-view-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.knowledge-view-card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 150px;
+}
+
+/* Card knowledge view */
 .card-knowledge-title {
     font-weight: bold;
     display: -webkit-box;

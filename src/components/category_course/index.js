@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import CardCourse from "./CardCourse";
 import TitleCategory from "./TitleCategory";
-import '../../styles/category_course/CategoryCourse.css';
+import './styles.css';
 // import { styled } from '@mui/system';
 // import { useEffect, useState } from "react";
 

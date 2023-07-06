@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import '../../styles/category_test/CategoryTestLink.css'
+import './styles.css'
 
 export default function CategoryTestLink({ name }) {
     return (

@@ -1,6 +1,6 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import '../../styles/category_course/CardCourse.css'
+import './styles.css'
 
 export default function CardCourse({ altImg, linkImg, describe, index }) {
     const colorImg = ["#009D9D",
