@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material'
-import './styles.css'
+import './styles.scss'
 // import AnimationsZoom from '../../animations/AnimationsZoom'
 
 export default function HomeBase() {

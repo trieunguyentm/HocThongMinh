@@ -1,9 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import CardHomeFeedBack from "./CardHomeFeedBack";
-import './styles.css'
+import './styles.scss'
 import { useState } from "react";
 import { useMediaQuery } from "@mui/material";
+import { Autoplay } from "swiper";
 // import AnimationsFadeTop from "../../animations/AnimationsFadeTop";
 
 export default function HomeFeedBack() {
@@ -66,6 +67,11 @@ export default function HomeFeedBack() {
                         // console.log(swiper.realIndex);
                         setHightLightIndex(swiper.realIndex);
                     }}
+                    autoplay={{
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    }}
+                    modules={[Autoplay]}
                 >
                     <SwiperSlide>
                         <CardHomeFeedBack

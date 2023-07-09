@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar } from "@mui/material";
-import './styles.css'
+import './styles.scss'
 import MenuIcon from '@mui/icons-material/Menu';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -87,74 +87,84 @@ export default function NavBar() {
     return (
         <div className="navbar-header">
             <AppBar position="sticky" className="navbar">
-                <Container maxWidth="xl">
-                    <Toolbar>
+                <Container className="navbar-header-container">
+                    <Toolbar className="navbar-header-toolbar">
                         {/* small */}
-                        <IconButton onClick={handleClickMenu} sx={{ display: { xs: 'flex', md: 'none' } }}>
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            anchorEl={anchorElMenu}
-                            open={openMenu}
-                            onClose={handleCloseMenu}
-                        >
-                            <MenuItem onClick={handleCloseMenu}>
-                                <Button
-                                    sx={{ my: 2, color: 'black', margin: '2px' }}
-                                >
-                                    Luyện Thi THPT QG
-                                </Button>
-                            </MenuItem>
-                            <MenuItem onClick={handleClickSmallTHCS}>
-                                <Button
-                                    sx={{ my: 2, color: 'black', margin: '2px' }}
-                                    endIcon={openSmallTHCS ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                                >
-                                    THCS
-                                </Button>
+                        <div className="navbar-header-toolbar-small">
+                            <IconButton onClick={handleClickMenu}
+                                sx={
+                                    {
+                                        display: { xs: 'flex', md: 'none' },
+                                        color: "white",
+                                    }
+                                }
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                            <Menu
+                                anchorEl={anchorElMenu}
+                                open={openMenu}
+                                onClose={handleCloseMenu}
+                            >
+                                <MenuItem onClick={handleCloseMenu}>
+                                    <Button
+                                        sx={{ my: 2, color: 'black', margin: '2px' }}
+                                    >
+                                        Luyện Thi THPT QG
+                                    </Button>
+                                </MenuItem>
+                                <MenuItem onClick={handleClickSmallTHCS}>
+                                    <Button
+                                        sx={{ my: 2, color: 'black', margin: '2px' }}
+                                        endIcon={openSmallTHCS ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                    >
+                                        THCS
+                                    </Button>
 
-                            </MenuItem>
-                            {/* Lớp 6, 7, 8, 9 */}
-                            <ListButton pages={THCS} open={openSmallTHCS} handleCloseMenu={handleCloseMenu} />
-                            <MenuItem onClick={handleClickSmallTHPT}>
-                                <Button
-                                    sx={{ my: 2, color: 'black', margin: '2px' }}
-                                    endIcon={openSmallTHPT ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                                >
-                                    THPT
-                                </Button>
-                            </MenuItem>
-                            {/* Lớp 10, 11, 12 */}
-                            <ListButton pages={THPT} open={openSmallTHPT} handleCloseMenu={handleCloseMenu} />
-                            <MenuItem onClick={handleCloseMenu}>
-                                <Button
-                                    sx={{ my: 2, color: 'black', margin: '2px' }}
-                                >
-                                    Đề thi ĐGNL
-                                </Button>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseMenu}>
-                                <Button
-                                    sx={{ my: 2, color: 'black', margin: '2px' }}
-                                >
-                                    Tài liệu
-                                </Button>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseMenu}>
-                                <Button
-                                    sx={{ my: 2, color: 'black', margin: '2px' }}
-                                >
-                                    Kiến thức
-                                </Button>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseMenu}>
-                                <Button
-                                    sx={{ my: 2, color: 'black', margin: '2px' }}
-                                >
-                                    Thi đấu
-                                </Button>
-                            </MenuItem>
-                        </Menu>
+                                </MenuItem>
+                                {/* Lớp 6, 7, 8, 9 */}
+                                <ListButton pages={THCS} open={openSmallTHCS} handleCloseMenu={handleCloseMenu} />
+                                <MenuItem onClick={handleClickSmallTHPT}>
+                                    <Button
+                                        sx={{ my: 2, color: 'black', margin: '2px' }}
+                                        endIcon={openSmallTHPT ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                    >
+                                        THPT
+                                    </Button>
+                                </MenuItem>
+                                {/* Lớp 10, 11, 12 */}
+                                <ListButton pages={THPT} open={openSmallTHPT} handleCloseMenu={handleCloseMenu} />
+                                <MenuItem onClick={handleCloseMenu}>
+                                    <Button
+                                        sx={{ my: 2, color: 'black', margin: '2px' }}
+                                    >
+                                        Đề thi ĐGNL
+                                    </Button>
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseMenu}>
+                                    <Button
+                                        sx={{ my: 2, color: 'black', margin: '2px' }}
+                                    >
+                                        Tài liệu
+                                    </Button>
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseMenu}>
+                                    <Button
+                                        sx={{ my: 2, color: 'black', margin: '2px' }}
+                                    >
+                                        Kiến thức
+                                    </Button>
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseMenu}>
+                                    <Button
+                                        sx={{ my: 2, color: 'black', margin: '2px' }}
+                                    >
+                                        Thi đấu
+                                    </Button>
+                                </MenuItem>
+                            </Menu>
+                        </div>
+
                         {/* medium */}
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             {

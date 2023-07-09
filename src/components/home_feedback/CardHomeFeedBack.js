@@ -1,10 +1,10 @@
 import { CardContent, CardMedia, Rating, Typography } from "@mui/material";
-import './styles.css'
+import './styles.scss'
 
 export default function CardHomeFeedBack({ linkImg, name, rating, content, hightLight }) {
 
     return (
-        <div className="container-card-home-feedback">
+        <div className="container-card-home-feedback" style={{ scale: `${hightLight ? "1.06" : "0.9"}` }}>
             <div style={{ height: '100%' }} className="card-home-feedback">
                 {
                     hightLight &&

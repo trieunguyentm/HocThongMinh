@@ -1,4 +1,4 @@
-import './styles.css'
+import './styles.scss'
 import PlaceIcon from '@mui/icons-material/Place';
 import EmailIcon from '@mui/icons-material/Email';
 

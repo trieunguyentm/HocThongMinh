@@ -1,0 +1,54 @@
+.navbar-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar {
+    background-color: #009D9D !important;
+}
+
+.navbar-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-header-toolbar {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+@media (min-width: 1100px) {
+    .navbar-header-toolbar {
+        max-width: 1100px;
+    }
+}
+
+@media (min-width: 576px) {
+    .navbar-header-toolbar {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
+/* Button ở trạng thái medium */
+.button-nav {
+    transition: transform 0.5s, color 0.5s !important;
+}
+
+.button-nav:hover {
+    transform: translateY(-5px) !important;
+}
+
+.nav-medium{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -1,6 +1,10 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import 'swiper/css';
 import 'swiper/swiper-bundle.css';
+// import required modules
+import { Autoplay } from 'swiper';
 import CardHomeUtils from './CardHomeUtils';
 import { useMediaQuery } from '@mui/material';
 // import required modules
@@ -39,6 +43,12 @@ const SwiperHomeUtils = () => {
                 slidesPerView={slidesPerView}
                 spaceBetween={30}
                 loop={true}
+                centeredSlides={true}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }}
+                modules={[Autoplay]}
             >
                 {
                     arrImg.map((itemArrImg, index) => {
