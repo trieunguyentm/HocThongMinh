@@ -186,8 +186,8 @@
     border-radius: 10px;
     background-color: #fbfbfb;
     width: 100%;
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
 }
 
 #user {
@@ -215,8 +215,8 @@
     border-radius: 10px;
     background-color: #fbfbfb;
     width: 100%;
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
 }
 
 #password {
@@ -330,12 +330,12 @@
 .signup-form {
     margin-top: 0px;
     overflow-x: hidden;
-    width: 800px;
+    width: 730px;
     border-radius: 20px;
     background-color: white;
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
 }
 
 .signup-form-content {
@@ -348,6 +348,7 @@
 .signup-form-content-title {
     display: flex;
     width: 100%;
+    // margin-top: 70px;
 }
 
 .signup-form-content-title-close {
@@ -408,8 +409,8 @@
     background-color: #fbfbfb;
     border-radius: 10px;
     width: 100%;
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
 }
 
 .name-signup {
@@ -424,8 +425,8 @@
     background-color: #fbfbfb;
     border-radius: 10px;
     width: 100%;
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
 }
 
 .password-signup {
@@ -440,8 +441,8 @@
     background-color: #fbfbfb;
     border-radius: 10px;
     width: 100%;
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
 }
 
 .confirm-password-signup {
@@ -456,8 +457,8 @@
     background-color: #fbfbfb;
     border-radius: 10px;
     width: 100%;
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
 }
 
 .mail-signup {
@@ -472,8 +473,8 @@
     background-color: #fbfbfb;
     border-radius: 10px;
     width: 100%;
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
 }
 
 .phone-signup {
@@ -488,8 +489,8 @@
     background-color: #fbfbfb;
     border-radius: 10px;
     width: 100%;
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
 }
 
 .class-signup {
@@ -504,8 +505,8 @@
     background-color: #fbfbfb;
     border-radius: 10px;
     width: 100%;
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
 }
 
 #data-signup {
@@ -514,7 +515,6 @@
     background-color: transparent;
     font-size: 16px;
     width: 100%;
-    opacity: 0.5;
 }
 
 #data-signup:focus {
@@ -590,3 +590,35 @@
 .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
     padding: 0 !important;
 }
+
+.error-data {
+    border-top: 1px solid red;
+    margin: 4px 0 0 0;
+    padding: 1px 0 0 0;
+    color: red;
+    font-size: 12px;
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+    box-shadow: none !important;
+}
+
+// @media screen and (max-width: 745px) {
+//     .signup-form {
+//         width: 550px;
+//     }
+
+//     .signup-form-data {
+//         display: block;
+//     }
+
+//     .signup-form-data-left {
+//         width: 100%;
+//         padding-right: 0;
+//     }
+
+//     .signup-form-data-right {
+//         width: 100%;
+//         padding-left: 0;
+//     }
+// }
