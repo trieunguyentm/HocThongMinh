@@ -509,7 +509,7 @@
     // align-items: center;
 }
 
-#data-signup {
+.data-signup {
     border: none;
     padding: 0 10px;
     background-color: transparent;
@@ -517,7 +517,7 @@
     width: 100%;
 }
 
-#data-signup:focus {
+.data-signup:focus {
     outline: none;
 }
 
@@ -603,22 +603,62 @@
     box-shadow: none !important;
 }
 
-// @media screen and (max-width: 745px) {
-//     .signup-form {
-//         width: 550px;
-//     }
+@media screen and (max-width: 745px) {
+    .signup-form {
+        width: 550px;
+    }
 
-//     .signup-form-data {
-//         display: block;
-//     }
+    .signup-form-data {
+        display: block;
+    }
 
-//     .signup-form-data-left {
-//         width: 100%;
-//         padding-right: 0;
-//     }
+    .signup-form-data-left {
+        width: 100%;
+        padding-right: 0;
+    }
 
-//     .signup-form-data-right {
-//         width: 100%;
-//         padding-left: 0;
-//     }
-// }
+    .signup-form-data-right {
+        width: 100%;
+        padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 565px) {
+    .signup-form {
+        width: 450px;
+    }
+
+    .signup-form-data {
+        display: block;
+    }
+
+    .signup-form-data-left {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .signup-form-data-right {
+        width: 100%;
+        padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .signup-form {
+        width: 300px;
+    }
+
+    .signup-form-data {
+        display: block;
+    }
+
+    .signup-form-data-left {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .signup-form-data-right {
+        width: 100%;
+        padding-left: 0;
+    }
+}

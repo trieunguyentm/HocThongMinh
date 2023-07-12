@@ -376,7 +376,7 @@ export default function AppBar() {
                                                     style={{ width: '23.43px', height: '23.43px' }}
                                                 />
                                                 <input
-                                                    id="data-signup"
+                                                    className="data-signup"
                                                     style={{
                                                         opacity: `${signUpUser ? 1 : 0.5}`
                                                     }}
@@ -406,7 +406,7 @@ export default function AppBar() {
                                                     style={{ width: '23.43px', height: '23.43px' }}
                                                 />
                                                 <input
-                                                    id="data-signup"
+                                                    className="data-signup"
                                                     style={{
                                                         opacity: `${signUpName ? 1 : 0.5}`
                                                     }}
@@ -437,7 +437,7 @@ export default function AppBar() {
                                                     style={{ width: '23.43px', height: '23.43px' }}
                                                 />
                                                 <input
-                                                    id="data-signup"
+                                                    className="data-signup"
                                                     style={{
                                                         opacity: `${signUpPassword ? 1 : 0.5}`
                                                     }}
@@ -467,7 +467,7 @@ export default function AppBar() {
                                                     style={{ width: '23.43px', height: '23.43px' }}
                                                 />
                                                 <input
-                                                    id="data-signup"
+                                                    className="data-signup"
                                                     style={{
                                                         opacity: `${signUpConfirmPassword ? 1 : 0.5}`
                                                     }}
@@ -500,7 +500,7 @@ export default function AppBar() {
                                                 style={{ width: '23.43px', height: '23.43px' }}
                                             />
                                             <input
-                                                id="data-signup"
+                                                className="data-signup"
                                                 style={{
                                                     opacity: `${signUpEmail ? 1 : 0.5}`
                                                 }}
@@ -530,7 +530,7 @@ export default function AppBar() {
                                                 style={{ width: '23.43px', height: '23.43px' }}
                                             />
                                             <input
-                                                id="data-signup"
+                                                className="data-signup"
                                                 style={{
                                                     opacity: `${signUpPhone ? 1 : 0.5}`
                                                 }}
