@@ -1,7 +1,10 @@
 import { Button, Dialog, Divider, IconButton, MenuItem, Select } from '@mui/material'
+import * as React from 'react';
 import './styles.scss'
 import { useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
+import axios from 'axios';
+import Message from './Message';
 
 export default function AppBar() {
     const [openDialogSignIn, setOpenDialogSignIn] = useState(false);
@@ -11,7 +14,6 @@ export default function AppBar() {
     const [errorSignInUser, setErrorSignInUser] = useState(false);
     const [signInPassword, setSignInPassword] = useState("");
     const [errorSignInPassword, setErrorSignInPassword] = useState(false);
-
     // Đăng ký
     const [signUpUser, setSignUpUser] = useState("")
     const [errorSignUpUser, setErrorSignUpUser] = useState(false);
@@ -24,15 +26,21 @@ export default function AppBar() {
     const [signUpEmail, setSignUpEmail] = useState("");
     const [errorSignUpEmail, setErrorSignUpEmail] = useState(false);
     const [signUpPhone, setSignUpPhone] = useState("");
+    const [errorSignUpPhone, setErrorSignUpPhone] = useState(false);
     const [signUpClass, setSignUpClass] = useState("Chọn lớp của bạn");
     const [errorSignUpClass, setErrorSignUpClass] = useState(false);
-
+    // Text lỗi
     const [textErrorUser, setTextErrorUser] = useState("");
     const [textErrorName, setTextErrorName] = useState("");
     const [textErrorPassword, setTextErrorPassword] = useState("");
     const [textErrorConfirm, setTextErrorConfirm] = useState("");
     const [textErrorEmail, setTextErrorEmail] = useState("");
+    const [textErrorPhone, setTextErrorPhone] = useState("");
     const [textErrorClass, setTextErrorClass] = useState("");
+    // Mở và đóng Message
+    const [openMessage, setOpenMessage] = useState(false);
+    const [typeMessage, setTypeMessage] = useState("success");
+    const [textMessage, setTextMessage] = useState("");
 
     useEffect(() => {
         // Check user
@@ -84,6 +92,18 @@ export default function AppBar() {
         }
     }, [signUpEmail])
 
+    useEffect(() => {
+        // Check phone
+        var regexPhone = /^[0-9]+$/;
+        if (signUpPhone !== "" && (signUpPhone.length < 10 || signUpPhone.length > 11 || signUpPhone[0] !== '0' || !regexPhone.test(signUpPhone))) {
+            setErrorSignUpPhone(true);
+            setTextErrorPhone("Số điện thoại không tồn tại!")
+        }
+        else {
+            setErrorSignUpPhone(false);
+        }
+    }, [signUpPhone])
+
     const handleCloseDialogSignIn = () => {
         setOpenDialogSignIn(false);
     }
@@ -113,11 +133,12 @@ export default function AppBar() {
         setSignUpEmail("");
         setErrorSignUpEmail(false);
         setSignUpPhone("");
+        setErrorSignUpPhone(false);
         setSignUpClass("Chọn lớp của bạn");
         setErrorSignUpClass(false);
     }
     // Xử lý signin
-    const handleClickSignIn = () => {
+    const handleClickSignIn = async () => {
         if (signInUser === "") {
             setTextErrorUser("Vui lòng nhập trường này")
             setErrorSignInUser(true);
@@ -137,7 +158,7 @@ export default function AppBar() {
         }
     }
     // Xử lý signup
-    const handleClickSignUp = () => {
+    const handleClickSignUp = async () => {
         if (signUpUser === "") {
             setTextErrorUser("Vui lòng nhập thông tin!");
             setErrorSignUpUser(true);
@@ -162,6 +183,7 @@ export default function AppBar() {
             setTextErrorClass("Vui lòng nhập thông tin!");
             setErrorSignUpClass(true);
         }
+        // Nếu dữ liệu không được bỏ trống và không có lỗi
         if (
             signUpUser !== ""
             && signUpName !== ""
@@ -175,17 +197,49 @@ export default function AppBar() {
             && (errorSignUpConfirmPassword === false)
             && (errorSignUpEmail === false)
             && (errorSignUpClass === false)
-
+            && (errorSignUpPhone === false)
         ) {
-            alert("success");
+            try {
+                const url = "http://localhost:2400/user/signup";
+                const dataSend = {
+                    usernameStudent: signUpUser,
+                    nameStudent: signUpName,
+                    passwordStudent: signUpPassword,
+                    emailStudent: signUpEmail,
+                    classStudent: signUpClass,
+                    phoneStudent: signUpPhone
+                }
+                const response = await axios.post(
+                    url,
+                    dataSend
+                )
+                if (response.data.code === 0) {
+                    setTypeMessage("success");
+                    setTextMessage("Đăng ký tài khoản thành công!");
+                    setOpenMessage(true);
+                    setOpenDialogSignUp(false);
+                }
+            } catch (error) {
+                if (error.response.data.code === 1) {
+                    setTypeMessage("error");
+                    setTextMessage("Tên người dùng đã tồn tại!");
+                    setOpenMessage(true);
+                }
+                else if (error.response.data.code === 2) {
+                    setTypeMessage("error");
+                    setTextMessage("Thông tin không hợp lệ!");
+                }
+            }
+
         }
         else {
-            alert("fail");
+            console.log("FAIL!");
         }
     }
 
     return (
         <>
+            {/* Giao diện */}
             <div className='appbar-header'>
                 <div className='appbar-header-container'>
                     <div className='appbar-header-nav'>
@@ -213,6 +267,13 @@ export default function AppBar() {
                     </div>
                 </div>
             </div>
+            {/* Message */}
+            <Message
+                open={openMessage}
+                onClose={() => setOpenMessage(false)}
+                typeMessage={typeMessage}
+                textMessage={textMessage}
+            />
             {/* Dialog đăng nhập */}
             <Dialog
                 id="signin"
@@ -540,6 +601,13 @@ export default function AppBar() {
                                                 onChange={(e) => setSignUpPhone(e.target.value)}
                                             />
                                         </div>
+                                        {
+                                            errorSignUpPhone && (
+                                                <div className='error-data'>
+                                                    {textErrorPhone}
+                                                </div>
+                                            )
+                                        }
                                     </div>
                                 </div>
                                 <div className='class-signup'>
