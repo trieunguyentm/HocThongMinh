@@ -5,8 +5,18 @@ import { useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import Message from './Message';
+import { useDispatch, useSelector } from 'react-redux';
+import SaveInfoUserAction from '../../redux/actions/userAction.js'
+import LetterAvatars from './Avatar.js'
 
 export default function AppBar() {
+    // Redux
+    const dispatch = useDispatch();
+    // Lấy state từ store
+    const saveInfoUser = useSelector((state) => state.saveInfoUser);
+    // Trạng thái đăng nhập
+    const [status, setStatus] = useState(saveInfoUser.name ? true : false);
+    // Đóng mở dialog
     const [openDialogSignIn, setOpenDialogSignIn] = useState(false);
     const [openDialogSignUp, setOpenDialogSignUp] = useState(false);
     // Đăng nhập
@@ -151,10 +161,48 @@ export default function AppBar() {
             && errorSignInUser === false
             && errorSignInPassword === false
         ) {
-            alert("succes");
+            try {
+                const url = "http://localhost:2400/user/signin";
+                const dataSend = {
+                    usernameStudent: signInUser,
+                    passwordStudent: signInPassword,
+                }
+                const response = await axios.post(
+                    url,
+                    dataSend
+                )
+                console.log(response);
+                if (response.data.code === 0) {
+                    dispatch(SaveInfoUserAction({
+                        userName: response.data.data.user_name,
+                        name: response.data.data.name,
+                        email: response.data.data.email,
+                        classStudent: response.data.data.class_student,
+                        phone: response.data.data.phone
+                    }))
+                    setTypeMessage("success");
+                    setTextMessage("Đăng nhập thành công!");
+                    setOpenMessage(true);
+                    setOpenDialogSignIn(false);
+                    setStatus(true);
+                }
+            } catch (error) {
+                if (error.response.data.code === 1) {
+                    setTypeMessage("error");
+                    setTextMessage("Mật khẩu không chính xác!");
+                    setOpenMessage(true);
+                }
+                else if (error.response.data.code === 2) {
+                    setTypeMessage("error");
+                    setTextMessage("Tài khoản không tồn tại!");
+                    setOpenMessage(true);
+                }
+            }
         }
         else {
-            alert("fail");
+            setTypeMessage("error");
+            setTextMessage("Hãy nhập đầy đủ thông tin!");
+            setOpenMessage(true);
         }
     }
     // Xử lý signup
@@ -228,12 +276,15 @@ export default function AppBar() {
                 else if (error.response.data.code === 2) {
                     setTypeMessage("error");
                     setTextMessage("Thông tin không hợp lệ!");
+                    setOpenMessage(true);
                 }
             }
 
         }
         else {
-            console.log("FAIL!");
+            setTypeMessage("error");
+            setTextMessage("Hãy nhập đầy đủ thông tin!");
+            setOpenMessage(true);
         }
     }
 
@@ -247,22 +298,42 @@ export default function AppBar() {
                             <img className="logo" alt="Logo" src="https://hocthongminh.com/images/logo.svg"></img>
                         </div>
                         <div className='appbar-header-right'>
-                            <Button
-                                className="button-appbar-header"
-                                variant="contained"
-                                size="medium"
-                                onClick={handleOpenDialogSignIn}
+                            <div style=
+                                {
+                                    {
+                                        display: `${status ? 'none' : 'flex'}`,
+                                        alignItems: 'center'
+                                    }
+                                }
                             >
-                                Đăng nhập
-                            </Button>
-                            <Button
-                                className="button-appbar-header"
-                                variant="contained"
-                                size="medium"
-                                onClick={handleOpenDialogSignUp}
+                                <Button
+                                    className="button-appbar-header"
+                                    variant="contained"
+                                    size="medium"
+                                    onClick={handleOpenDialogSignIn}
+                                >
+                                    Đăng nhập
+                                </Button>
+                                <Button
+                                    className="button-appbar-header"
+                                    variant="contained"
+                                    size="medium"
+                                    onClick={handleOpenDialogSignUp}
+                                >
+                                    Đăng ký
+                                </Button>
+                            </div>
+                            <div style=
+                                {
+                                    {
+                                        display: `${status ? 'flex' : 'none'}`,
+                                        alignItems: 'center',
+                                        cursor: 'pointer'
+                                    }
+                                }
                             >
-                                Đăng ký
-                            </Button>
+                                <LetterAvatars />
+                            </div>
                         </div>
                     </div>
                 </div>

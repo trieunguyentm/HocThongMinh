@@ -2,10 +2,12 @@ import './App.css'
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ClassPage from "./pages/ClassPage";
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 export default function App() {
     return (
-        <>
+        <Provider store={store}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
@@ -19,6 +21,6 @@ export default function App() {
                     <Route path="*" element={<Navigate replace to="/" />} />
                 </Routes>
             </BrowserRouter>
-        </>
+        </Provider>
     )
 }
