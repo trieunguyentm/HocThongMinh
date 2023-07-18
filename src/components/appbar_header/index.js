@@ -1,4 +1,4 @@
-import { Button, Dialog, Divider, IconButton, MenuItem, Select } from '@mui/material'
+import { Button, Dialog, Divider, IconButton, Menu, MenuItem, Select } from '@mui/material'
 import * as React from 'react';
 import './styles.scss'
 import { useEffect, useState } from 'react'
@@ -6,8 +6,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import Message from './Message';
 import { useDispatch, useSelector } from 'react-redux';
-import SaveInfoUserAction from '../../redux/actions/userAction.js'
+import SaveInfoUserAction from '../../redux/actions/saveUserAction.js'
 import LetterAvatars from './Avatar.js'
+import PersonIcon from '@mui/icons-material/Person';
+import SchoolIcon from '@mui/icons-material/School';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ResetInforUserAction from '../../redux/actions/resetUserAction';
 
 export default function AppBar() {
     // Redux
@@ -51,6 +55,17 @@ export default function AppBar() {
     const [openMessage, setOpenMessage] = useState(false);
     const [typeMessage, setTypeMessage] = useState("success");
     const [textMessage, setTextMessage] = useState("");
+    // Click User
+    const [anchorEl, setAnchorEl] = useState(null);
+    const statusOpenMenu = Boolean(anchorEl);
+
+    const openMenuUser = (e) => {
+        setAnchorEl(e.currentTarget);
+    }
+
+    const closeMenuUser = () => {
+        setAnchorEl(null);
+    }
 
     useEffect(() => {
         // Check user
@@ -288,6 +303,12 @@ export default function AppBar() {
         }
     }
 
+    const handleSignOut = () => {
+        dispatch(ResetInforUserAction());
+        setStatus(false);
+        setAnchorEl(null);
+    }
+
     return (
         <>
             {/* Giao diện */}
@@ -331,9 +352,35 @@ export default function AppBar() {
                                         cursor: 'pointer'
                                     }
                                 }
+                                onClick={openMenuUser}
                             >
                                 <LetterAvatars />
                             </div>
+                            <Menu
+                                id="basic-menu"
+                                anchorEl={anchorEl}
+                                open={statusOpenMenu}
+                                onClose={closeMenuUser}
+                            >
+                                <MenuItem onClick={closeMenuUser}>
+                                    <div style={{ display: 'flex', alignItems: 'center', padding: '10px 0', cursor: 'pointer' }}>
+                                        <PersonIcon style={{ marginRight: '7px' }} />
+                                        {saveInfoUser.name}
+                                    </div>
+                                </MenuItem>
+                                <MenuItem onClick={closeMenuUser}>
+                                    <div style={{ display: 'flex', alignItems: 'center', padding: '10px 0', cursor: 'pointer' }}>
+                                        <SchoolIcon style={{ marginRight: '7px' }} />
+                                        Kết quả học tập
+                                    </div>
+                                </MenuItem>
+                                <MenuItem onClick={handleSignOut}>
+                                    <div style={{ display: 'flex', alignItems: 'center', padding: '10px 0', cursor: 'pointer' }}>
+                                        <LogoutIcon style={{ marginRight: '7px' }} />
+                                        Đăng xuất
+                                    </div>
+                                </MenuItem>
+                            </Menu>
                         </div>
                     </div>
                 </div>
