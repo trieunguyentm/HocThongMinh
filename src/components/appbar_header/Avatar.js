@@ -22,7 +22,7 @@ function stringToColor(string) {
     return color;
 }
 
-export default function LetterAvatars() {
+export default function LetterAvatars({ size }) {
     // Lấy state từ store
     const saveInfoUser = useSelector((state) => state.saveInfoUser);
     const words = saveInfoUser.name.split(" ");
@@ -32,7 +32,7 @@ export default function LetterAvatars() {
     const color = stringToColor(saveInfoUser.name);
 
     return (
-        <Avatar sx={{ bgcolor: color }}>
+        <Avatar sx={{ bgcolor: color, width: `${size ? `${size}px` : 'none'}`, height: `${size ? `${size}px` : 'none'}`, fontSize: `${size ? '60px' : 'none'}` }}>
             {name}
         </Avatar>
     );

@@ -12,8 +12,10 @@ import PersonIcon from '@mui/icons-material/Person';
 import SchoolIcon from '@mui/icons-material/School';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ResetInforUserAction from '../../redux/actions/resetUserAction';
+import { useNavigate } from 'react-router-dom';
 
 export default function AppBar() {
+    const navigate = useNavigate();
     // Redux
     const dispatch = useDispatch();
     // Lấy state từ store
@@ -186,7 +188,6 @@ export default function AppBar() {
                     url,
                     dataSend
                 )
-                console.log(response);
                 if (response.data.code === 0) {
                     dispatch(SaveInfoUserAction({
                         userName: response.data.data.user_name,
@@ -302,12 +303,18 @@ export default function AppBar() {
             setOpenMessage(true);
         }
     }
-
+    // Xử lý đăng xuất
     const handleSignOut = () => {
         dispatch(ResetInforUserAction());
         setStatus(false);
         setAnchorEl(null);
     }
+    // Xử lý xem trang cá nhân
+    const handleViewProfile = () => {
+        setAnchorEl(null);
+        navigate('/thong-tin-ca-nhan');
+    }
+
 
     return (
         <>
@@ -315,8 +322,12 @@ export default function AppBar() {
             <div className='appbar-header'>
                 <div className='appbar-header-container'>
                     <div className='appbar-header-nav'>
-                        <div className="appbar-header-left">
-                            <img className="logo" alt="Logo" src="https://hocthongminh.com/images/logo.svg"></img>
+                        <div className="appbar-header-left" onClick={() => navigate("/")}>
+                            <img
+                                className="logo"
+                                alt="Logo"
+                                src="https://hocthongminh.com/images/logo.svg">
+                            </img>
                         </div>
                         <div className='appbar-header-right'>
                             <div style=
@@ -362,7 +373,7 @@ export default function AppBar() {
                                 open={statusOpenMenu}
                                 onClose={closeMenuUser}
                             >
-                                <MenuItem onClick={closeMenuUser}>
+                                <MenuItem onClick={handleViewProfile}>
                                     <div style={{ display: 'flex', alignItems: 'center', padding: '10px 0', cursor: 'pointer' }}>
                                         <PersonIcon style={{ marginRight: '7px' }} />
                                         {saveInfoUser.name}

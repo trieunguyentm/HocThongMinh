@@ -1,9 +1,10 @@
-import './App.css'
+import './App.scss'
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import ClassPage from "./pages/ClassPage";
+import HomePage from "./pages/home_page";
+import ClassPage from "./pages/class_page";
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import Profile from './pages/profile';
 
 export default function App() {
     return (
@@ -18,6 +19,8 @@ export default function App() {
                     <Route path="/lop-10" element={<ClassPage classPage="10" />} />
                     <Route path="/lop-11" element={<ClassPage classPage="11" />} />
                     <Route path="/lop-12" element={<ClassPage classPage="12" />} />
+                    <Route path="/thong-tin-ca-nhan" element={<Profile />} />
+                    {/* <Route path="/test" element={<DateInput />} /> */}
                     <Route path="*" element={<Navigate replace to="/" />} />
                 </Routes>
             </BrowserRouter>
