@@ -7,7 +7,10 @@ export default function ResetInforUserAction() {
             name: "",
             email: "",
             classStudent: "",
-            phone: ""
+            phone: "",
+            date: "",
+            school: "",
+            gender: ""
         }
     }
 }

@@ -1,10 +1,13 @@
 // Reducer SaveInforUser
 const initialState = {
-    userName: "trieunguyen2411",
-    name: "Triệu Nguyễn",
-    email: "trieunguyen241102@gmail.com",
-    classStudent: "Lớp 12",
-    phone: "0838241102"
+    userName: "",
+    name: "",
+    email: "",
+    classStudent: "",
+    phone: "",
+    date: "",
+    school: "",
+    gender: "",
 }
 
 export default function SaveInforUserReducer(state = initialState, action) {

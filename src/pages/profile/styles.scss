@@ -78,5 +78,33 @@
     border: 1px solid #dae0ea;
     font-weight: 500;
     color: #333333;
+}
 
+@media (max-width: 685px) {
+    .profile-page-box-content {
+        display: block;
+    }
+
+    .profile-page-box-content-col-1 {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .profile-page-box-content-col-2-and-3 {
+        width: 100% !important;
+    }
+
+    .profile-page-box-content-col-2-and-3-container {
+        display: block !important;
+    }
+
+    .profile-page-box-content-col-2 {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .profile-page-box-content-col-3 {
+        width: 100%;
+        max-width: 100%;
+    }
 }

@@ -7,12 +7,17 @@ import './styles.scss'
 import { Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import EventIcon from '@mui/icons-material/Event';
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateField } from "@mui/x-date-pickers/DateField";
+import dayjs from "dayjs";
 
 export default function Profile() {
     // Lấy state từ store
     const saveInfoUser = useSelector((state) => state.saveInfoUser);
+    const [sizeAvatar, setSizeAvatar] = useState(150);
     const [name, setName] = useState(saveInfoUser.name);
-    const [date, setDate] = useState(saveInfoUser.date || '');
+    const [date, setDate] = useState(dayjs(saveInfoUser.date ? saveInfoUser.date : ""));
     const [school, setSchool] = useState(saveInfoUser.school);
     const [email, setEmail] = useState(saveInfoUser.email);
     const [phone, setPhone] = useState(saveInfoUser.phone);
@@ -56,6 +61,26 @@ export default function Profile() {
     ]
 
     useEffect(() => {
+        const updateSizeAvatar = () => {
+            const windowWidth = window.innerWidth;
+            if (windowWidth < 685) {
+                setSizeAvatar(80);
+            } else {
+                setSizeAvatar(150);
+            }
+        };
+
+        // Gọi hàm updateSizeAvatar khi component được tạo và mỗi khi cửa sổ được resize
+        updateSizeAvatar();
+        window.addEventListener('resize', updateSizeAvatar);
+
+        // Cleanup: Loại bỏ sự kiện resize khi component unmount
+        return () => {
+            window.removeEventListener('resize', updateSizeAvatar);
+        };
+    }, []);
+
+    useEffect(() => {
         // Check email
         var regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         if (!regexEmail.test(email) && email !== "") {
@@ -76,28 +101,6 @@ export default function Profile() {
             setErrorPhone("");
         }
     }, [phone])
-
-    // Hàm xử lý sự kiện khi giá trị trường nhập liệu ngày sinh thay đổi
-    const handleChangeDate = (event) => {
-        const inputChar = event.target.value.slice(-1);
-        if (!/^\d+$/.test(inputChar)) {
-            return; // Nếu ký tự nhập không phải chữ số, không làm gì cả
-        }
-
-        const inputValue = event.target.value;
-        const formattedDate = formatDateString(inputValue);
-        setDate(formattedDate);
-    };
-
-    const formatDateString = (inputValue) => {
-        const cleanedValue = inputValue.replace(/\D/g, ''); // Lọc bỏ các ký tự không phải số
-        const day = cleanedValue.slice(0, 2);
-        const month = cleanedValue.slice(2, 4);
-        const year = cleanedValue.slice(4, 8);
-
-        const formattedValue = `${day}/${month}/${year}`;
-        return formattedValue;
-    };
 
     return (
         <>
@@ -120,9 +123,9 @@ export default function Profile() {
                                     >
                                         <div
                                             className="profile-page-box-content-avatar"
-                                            style={{ width: '150px', height: '150px', display: 'flex', justifyContent: 'center' }}
+                                            style={{ display: 'flex', justifyContent: 'center' }}
                                         >
-                                            <LetterAvatars size={150} />
+                                            <LetterAvatars size={sizeAvatar} />
                                         </div>
                                     </div>
 
@@ -142,8 +145,8 @@ export default function Profile() {
                                         </p>
                                     </div>
                                 </div>
-                                <div style={{ display: 'block', width: '70%' }}>
-                                    <div style={{ display: 'flex', width: '100%' }}>
+                                <div className="profile-page-box-content-col-2-and-3" style={{ display: 'block', width: '70%' }}>
+                                    <div className="profile-page-box-content-col-2-and-3-container" style={{ display: 'flex', width: '100%' }}>
                                         <div className="profile-page-box-content-col-2">
                                             <div className="profile-input">
                                                 <TextField
@@ -160,18 +163,20 @@ export default function Profile() {
                                                     onChange={(e) => setName(e.target.value)}
                                                 />
                                             </div>
-                                            <div className="profile-input" style={{ marginTop: '16px' }}>
-                                                <TextField
-                                                    variant="standard"
-                                                    style={{ width: '100%' }}
-                                                    placeholder="Chọn ngày sinh của bạn"
-                                                    InputProps={{
-                                                        startAdornment: <EventIcon style={{ width: '22px', height: '22px', marginRight: '10px', color: 'gray' }} />,
-                                                        disableUnderline: true, // <== added this
-                                                    }}
-                                                    value={date}
-                                                    onChange={handleChangeDate}
-                                                />
+                                            <div className="profile-input" style={{ marginTop: '16px', display: 'flex', alignItems: 'center' }}>
+                                                <EventIcon style={{ width: '22px', height: '22px', marginRight: '10px', color: 'gray' }} />
+                                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                                    <DateField
+                                                        variant="standard"
+                                                        value={date}
+                                                        onChange={(newValue) => setDate(newValue)}
+                                                        format="DD/MM/YYYY"
+                                                        InputProps={{
+                                                            disableUnderline: true, // <== added this
+                                                            placeholder: 'Chọn ngày sinh của bạn'
+                                                        }}
+                                                    />
+                                                </LocalizationProvider>
                                             </div>
                                             <div className="profile-input" style={{ marginTop: '16px' }}>
                                                 <TextField
@@ -329,6 +334,5 @@ export default function Profile() {
             </div >
             <Footer />
         </>
-
     )
 }

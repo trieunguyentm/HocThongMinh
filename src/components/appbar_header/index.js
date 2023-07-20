@@ -188,13 +188,17 @@ export default function AppBar() {
                     url,
                     dataSend
                 )
+                // Đăng nhập thành công, lưu thông tin người dùng bằng Redux
                 if (response.data.code === 0) {
                     dispatch(SaveInfoUserAction({
                         userName: response.data.data.user_name,
                         name: response.data.data.name,
                         email: response.data.data.email,
                         classStudent: response.data.data.class_student,
-                        phone: response.data.data.phone
+                        phone: response.data.data.phone,
+                        date: response.data.data.date,
+                        school: response.data.data.school,
+                        gender: response.data.data.gender
                     }))
                     setTypeMessage("success");
                     setTextMessage("Đăng nhập thành công!");
@@ -530,7 +534,6 @@ export default function AppBar() {
                     </div>
                 </div>
             </Dialog>
-
             {/* Dialog Đăng ký */}
             <Dialog
                 id="signup"
