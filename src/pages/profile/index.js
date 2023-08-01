@@ -25,6 +25,7 @@ export default function Profile() {
     const [gender, setGender] = useState(saveInfoUser.gender);
     const [errorEmail, setErrorEmail] = useState("");
     const [errorPhone, setErrorPhone] = useState("");
+
     const classArr = [
         {
             value: "Chọn lớp của bạn",
