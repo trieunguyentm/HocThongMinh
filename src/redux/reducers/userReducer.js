@@ -1,4 +1,4 @@
-// Reducer SaveInforUser
+// Reducer SaveInfoUser
 const initialState = {
     userName: "",
     name: "",
@@ -10,11 +10,11 @@ const initialState = {
     gender: "",
 }
 
-export default function SaveInforUserReducer(state = initialState, action) {
+export default function SaveInfoUserReducer(state = initialState, action) {
     switch (action.type) {
-        case 'SAVE_INFOR':
+        case 'SAVE_INFO':
             return action.payload;
-        case 'RESET_INFOR':
+        case 'RESET_INFO':
             return action.payload;
         default:
             return state;

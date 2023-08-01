@@ -1,7 +1,7 @@
 // Action Creator
-export default function ResetInforUserAction() {
+export function ResetInfoUserAction() {
     return {
-        type: 'RESET_INFOR',
+        type: 'RESET_INFO',
         payload: {
             userName: "",
             name: "",
@@ -12,5 +12,13 @@ export default function ResetInforUserAction() {
             school: "",
             gender: ""
         }
+    }
+}
+
+// Action Creator
+export function SaveInfoUserAction(info) {
+    return {
+        type: 'SAVE_INFO',
+        payload: info
     }
 }

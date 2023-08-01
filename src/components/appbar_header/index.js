@@ -6,12 +6,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import Message from './Message';
 import { useDispatch, useSelector } from 'react-redux';
-import SaveInfoUserAction from '../../redux/actions/saveUserAction.js'
 import LetterAvatars from './Avatar.js'
 import PersonIcon from '@mui/icons-material/Person';
 import SchoolIcon from '@mui/icons-material/School';
 import LogoutIcon from '@mui/icons-material/Logout';
-import ResetInforUserAction from '../../redux/actions/resetUserAction';
+import { ResetInfoUserAction, SaveInfoUserAction } from '../../redux/actions/userAction';
 import { useNavigate } from 'react-router-dom';
 
 export default function AppBar() {
@@ -191,14 +190,14 @@ export default function AppBar() {
                 // Đăng nhập thành công, lưu thông tin người dùng bằng Redux
                 if (response.data.code === 0) {
                     dispatch(SaveInfoUserAction({
-                        userName: response.data.data.user_name,
-                        name: response.data.data.name,
-                        email: response.data.data.email,
-                        classStudent: response.data.data.class_student,
-                        phone: response.data.data.phone,
-                        date: response.data.data.date,
-                        school: response.data.data.school,
-                        gender: response.data.data.gender
+                        userName: response.data.info.user_name,
+                        name: response.data.info.name,
+                        email: response.data.info.email,
+                        classStudent: response.data.info.class_student,
+                        phone: response.data.info.phone,
+                        date: response.data.info.date,
+                        school: response.data.info.school,
+                        gender: response.data.info.gender
                     }))
                     setTypeMessage("success");
                     setTextMessage("Đăng nhập thành công!");
@@ -309,7 +308,7 @@ export default function AppBar() {
     }
     // Xử lý đăng xuất
     const handleSignOut = () => {
-        dispatch(ResetInforUserAction());
+        dispatch(ResetInfoUserAction());
         setStatus(false);
         setAnchorEl(null);
     }

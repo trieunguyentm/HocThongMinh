@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import SaveInforUserReducer from './reducers/userReducer';
+import SaveInfoUserReducer from './reducers/userReducer';
 
 const rootReducer = combineReducers({
-    saveInfoUser: SaveInforUserReducer,
+    saveInfoUser: SaveInfoUserReducer,
 });
 
 export default rootReducer;
