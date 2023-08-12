@@ -7,7 +7,7 @@ function stringToColor(string) {
     let i;
 
     /* eslint-disable no-bitwise */
-    for (i = 0; i < string.length; i += 1) {
+    for (i = 0; i < string?.length; i += 1) {
         hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
 
@@ -24,16 +24,19 @@ function stringToColor(string) {
 
 export default function LetterAvatars({ size }) {
     // Lấy state từ store
-    const saveInfoUser = useSelector((state) => state.saveInfoUser);
-    const words = saveInfoUser.name.split(" ");
-    // Set name
-    let name = (words.length >= 2) ? `${words[0][0]}${words[words.length - 1][0]}` : `${words[0][0]}${words[0][0]}`;
-    // Set color
-    const color = stringToColor(saveInfoUser.name);
+    const currentUser = useSelector((state) => state.auth.login.currentUser);
+    if (currentUser !== null) {
+        const words = currentUser?.name.split(" ");
+        // Set name
+        let name = (words?.length >= 2) ? `${words[0][0]}${words[words?.length - 1][0]}` : `${words[0][0]}${words[0][0]}`;
+        // Set color
+        const color = stringToColor(currentUser?.name);
 
-    return (
-        <Avatar sx={{ bgcolor: color, width: `${size ? `${size}px` : 'none'}`, height: `${size ? `${size}px` : 'none'}`, fontSize: `${size ? '60px' : 'none'}` }}>
-            {name}
-        </Avatar>
-    );
+        return (
+            <Avatar sx={{ bgcolor: color, width: `${size ? `${size}px` : 'none'}`, height: `${size ? `${size}px` : 'none'}`, fontSize: `${size ? '60px' : 'none'}` }}>
+                {name}
+            </Avatar>
+        );
+    }
+
 }

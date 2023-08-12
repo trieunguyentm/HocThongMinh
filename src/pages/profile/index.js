@@ -14,15 +14,15 @@ import dayjs from "dayjs";
 
 export default function Profile() {
     // Lấy state từ store
-    const saveInfoUser = useSelector((state) => state.saveInfoUser);
+    const currentUser = useSelector((state) => state.auth.login.currentUser);
     const [sizeAvatar, setSizeAvatar] = useState(150);
-    const [name, setName] = useState(saveInfoUser.name);
-    const [date, setDate] = useState(dayjs(saveInfoUser.date ? saveInfoUser.date : ""));
-    const [school, setSchool] = useState(saveInfoUser.school);
-    const [email, setEmail] = useState(saveInfoUser.email);
-    const [phone, setPhone] = useState(saveInfoUser.phone);
-    const [classStudent, setClassStudent] = useState(saveInfoUser.classStudent);
-    const [gender, setGender] = useState(saveInfoUser.gender);
+    const [name, setName] = useState(currentUser?.name);
+    const [date, setDate] = useState(dayjs(currentUser?.date ? currentUser.date : ""));
+    const [school, setSchool] = useState(currentUser?.school);
+    const [email, setEmail] = useState(currentUser?.email);
+    const [phone, setPhone] = useState(currentUser?.phone);
+    const [classStudent, setClassStudent] = useState(currentUser?.class);
+    const [gender, setGender] = useState(currentUser?.gender);
     const [errorEmail, setErrorEmail] = useState("");
     const [errorPhone, setErrorPhone] = useState("");
 
@@ -62,6 +62,10 @@ export default function Profile() {
     ]
 
     useEffect(() => {
+        console.log("currentUser:", currentUser);
+    })
+
+    useEffect(() => {
         const updateSizeAvatar = () => {
             const windowWidth = window.innerWidth;
             if (windowWidth < 685) {
@@ -95,7 +99,7 @@ export default function Profile() {
     useEffect(() => {
         // Check phone
         var regexPhone = /^[0-9]+$/;
-        if (phone !== "" && (phone.length < 10 || phone.length > 11 || phone[0] !== '0' || !regexPhone.test(phone))) {
+        if (phone !== "" && phone !== undefined && (phone.length < 10 || phone.length > 11 || phone[0] !== '0' || !regexPhone.test(phone))) {
             setErrorPhone("Số điện thoại không đúng!")
         }
         else {
@@ -108,7 +112,7 @@ export default function Profile() {
             <AppBar />
             <NavBar />
             {
-                saveInfoUser.name ?
+                currentUser?.name ?
                     (
                         <div className="profile-main">
                             <div className="profile-container">
@@ -145,7 +149,7 @@ export default function Profile() {
                                                     }}
                                                 >
                                                     <p style={{ maxWidth: '100%' }}>
-                                                        {saveInfoUser.email}
+                                                        {currentUser.email}
                                                     </p>
                                                 </div>
                                             </div>

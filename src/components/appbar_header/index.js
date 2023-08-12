@@ -10,17 +10,17 @@ import LetterAvatars from './Avatar.js'
 import PersonIcon from '@mui/icons-material/Person';
 import SchoolIcon from '@mui/icons-material/School';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { ResetInfoUserAction, SaveInfoUserAction } from '../../redux/actions/userAction';
 import { useNavigate } from 'react-router-dom';
+import { loginFail, loginStart, loginSuccess, logoutFail, logoutStart, logoutSuccess, signupStart } from '../../redux/slices/authSlice';
 
 export default function AppBar() {
     const navigate = useNavigate();
     // Redux
     const dispatch = useDispatch();
     // Lấy state từ store
-    const saveInfoUser = useSelector((state) => state.saveInfoUser);
+    const currentUser = useSelector((state) => state.auth.login.currentUser);
     // Trạng thái đăng nhập
-    const [status, setStatus] = useState(saveInfoUser.name ? true : false);
+    const [status, setStatus] = useState(currentUser ? true : false);
     // Đóng mở dialog
     const [openDialogSignIn, setOpenDialogSignIn] = useState(false);
     const [openDialogSignUp, setOpenDialogSignUp] = useState(false);
@@ -166,7 +166,6 @@ export default function AppBar() {
     // Xử lý signin
     const handleClickSignIn = async () => {
         if (signInUser === "") {
-            setTextErrorUser("Vui lòng nhập trường này")
             setErrorSignInUser(true);
         }
         if (signInPassword === "") {
@@ -178,27 +177,18 @@ export default function AppBar() {
             && errorSignInPassword === false
         ) {
             try {
-                const url = "http://localhost:2400/user/signin";
+                const url = "http://localhost:8000/auth/signin";
                 const dataSend = {
                     usernameStudent: signInUser,
                     passwordStudent: signInPassword,
                 }
-                const response = await axios.post(
-                    url,
-                    dataSend
-                )
+                dispatch(loginStart())
+                const response = await axios.post(url, dataSend, {
+                    withCredentials: true
+                });
                 // Đăng nhập thành công, lưu thông tin người dùng bằng Redux
-                if (response.data.code === 0) {
-                    dispatch(SaveInfoUserAction({
-                        userName: response.data.info.user_name,
-                        name: response.data.info.name,
-                        email: response.data.info.email,
-                        classStudent: response.data.info.class_student,
-                        phone: response.data.info.phone,
-                        date: response.data.info.date,
-                        school: response.data.info.school,
-                        gender: response.data.info.gender
-                    }))
+                if (response.data.message === "Login Successfully") {
+                    dispatch(loginSuccess(response.data.user))
                     setTypeMessage("success");
                     setTextMessage("Đăng nhập thành công!");
                     setOpenMessage(true);
@@ -206,14 +196,15 @@ export default function AppBar() {
                     setStatus(true);
                 }
             } catch (error) {
-                if (error.response.data.code === 1) {
-                    setTypeMessage("error");
-                    setTextMessage("Mật khẩu không chính xác!");
-                    setOpenMessage(true);
-                }
-                else if (error.response.data.code === 2) {
+                dispatch(loginFail());
+                if (error.response?.data?.message === "User not found") {
                     setTypeMessage("error");
                     setTextMessage("Tài khoản không tồn tại!");
+                    setOpenMessage(true);
+                }
+                else if (error.response?.data?.message === "Incorrect password") {
+                    setTypeMessage("error");
+                    setTextMessage("Mật khẩu không chính xác!");
                     setOpenMessage(true);
                 }
             }
@@ -267,7 +258,7 @@ export default function AppBar() {
             && (errorSignUpPhone === false)
         ) {
             try {
-                const url = "http://localhost:2400/user/signup";
+                const url = "http://localhost:8000/auth/signup"
                 const dataSend = {
                     usernameStudent: signUpUser,
                     nameStudent: signUpName,
@@ -276,27 +267,28 @@ export default function AppBar() {
                     classStudent: signUpClass,
                     phoneStudent: signUpPhone
                 }
-                const response = await axios.post(
-                    url,
-                    dataSend
-                )
-                if (response.data.code === 0) {
+                dispatch(signupStart())
+                const response = await axios.post(url, dataSend, {
+                    withCredentials: true
+                })
+                if (response.data.message === "Signup succesfully") {
                     setTypeMessage("success");
                     setTextMessage("Đăng ký tài khoản thành công!");
                     setOpenMessage(true);
                     setOpenDialogSignUp(false);
                 }
             } catch (error) {
-                if (error.response.data.code === 1) {
+                // console.log(error);
+                if (error.response.data.index === 0) {
                     setTypeMessage("error");
                     setTextMessage("Tên người dùng đã tồn tại!");
                     setOpenMessage(true);
                 }
-                else if (error.response.data.code === 2) {
-                    setTypeMessage("error");
-                    setTextMessage("Thông tin không hợp lệ!");
-                    setOpenMessage(true);
-                }
+                // else if (error.response.data.code === 2) {
+                //     setTypeMessage("error");
+                //     setTextMessage("Thông tin không hợp lệ!");
+                //     setOpenMessage(true);
+                // }
             }
 
         }
@@ -307,10 +299,32 @@ export default function AppBar() {
         }
     }
     // Xử lý đăng xuất
-    const handleSignOut = () => {
-        dispatch(ResetInfoUserAction());
-        setStatus(false);
-        setAnchorEl(null);
+    const handleSignOut = async () => {
+        try {
+            const url = `http://localhost:8000/user/logout/${currentUser._id}`
+            dispatch(logoutStart());
+            const response = await axios.post(url, null, {
+                headers: {
+                    Authorization: `Bearer ${currentUser.accessToken}`
+                },
+                withCredentials: true
+            })
+            console.log(response)
+            if (response.data.message === "Logged out successfully") {
+                dispatch(logoutSuccess())
+                setTypeMessage("success");
+                setTextMessage("Đăng xuất thành công!");
+                setOpenMessage(true);
+                setOpenDialogSignIn(false);
+                setStatus(false);
+                closeMenuUser();
+            }
+        } catch (error) {
+            dispatch(logoutFail())
+            setTypeMessage("error");
+            setTextMessage("Xảy ra lỗi khi đăng xuất");
+            setOpenMessage(true);
+        }
     }
     // Xử lý xem trang cá nhân
     const handleViewProfile = () => {
@@ -379,7 +393,7 @@ export default function AppBar() {
                                 <MenuItem onClick={handleViewProfile}>
                                     <div style={{ display: 'flex', alignItems: 'center', padding: '10px 0', cursor: 'pointer' }}>
                                         <PersonIcon style={{ marginRight: '7px' }} />
-                                        {saveInfoUser.name}
+                                        {currentUser?.name}
                                     </div>
                                 </MenuItem>
                                 <MenuItem onClick={closeMenuUser}>
