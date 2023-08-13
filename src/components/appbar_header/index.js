@@ -13,6 +13,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { loginFail, loginStart, loginSuccess, logoutFail, logoutStart, logoutSuccess, signupStart } from '../../redux/slices/authSlice';
 import jwtDecode from 'jwt-decode';
+import CryptoJS from 'crypto-js';
 
 const axiosJWT = axios.create();
 
@@ -211,10 +212,14 @@ export default function AppBar() {
             && errorSignInPassword === false
         ) {
             try {
-                const url = "http://localhost:8000/auth/signin";
+                const url = "http://localhost:8000/auth/signin"
+                const passwordEncode = CryptoJS.AES.encrypt(signInPassword, process.env.REACT_APP_API_KEY).toString()
+                // const passwordDecode = CryptoJS.AES.decrypt(passwordEncode, process.env.REACT_APP_API_KEY).toString(CryptoJS.enc.Utf8)
+                // console.log(passwordEncode)
+                // console.log(passwordDecode)
                 const dataSend = {
                     usernameStudent: signInUser,
-                    passwordStudent: signInPassword,
+                    passwordStudent: passwordEncode,
                 }
                 dispatch(loginStart())
                 const response = await axios.post(url, dataSend, {
@@ -292,11 +297,12 @@ export default function AppBar() {
             && (errorSignUpPhone === false)
         ) {
             try {
+                const passwordEncode = CryptoJS.AES.encrypt(signUpPassword, process.env.REACT_APP_API_KEY).toString()
                 const url = "http://localhost:8000/auth/signup"
                 const dataSend = {
                     usernameStudent: signUpUser,
                     nameStudent: signUpName,
-                    passwordStudent: signUpPassword,
+                    passwordStudent: passwordEncode,
                     emailStudent: signUpEmail,
                     classStudent: signUpClass,
                     phoneStudent: signUpPhone
