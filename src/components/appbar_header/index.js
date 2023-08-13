@@ -12,6 +12,9 @@ import SchoolIcon from '@mui/icons-material/School';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { loginFail, loginStart, loginSuccess, logoutFail, logoutStart, logoutSuccess, signupStart } from '../../redux/slices/authSlice';
+import jwtDecode from 'jwt-decode';
+
+const axiosJWT = axios.create();
 
 export default function AppBar() {
     const navigate = useNavigate();
@@ -59,6 +62,37 @@ export default function AppBar() {
     // Click User
     const [anchorEl, setAnchorEl] = useState(null);
     const statusOpenMenu = Boolean(anchorEl);
+
+    // Tạo axios Interceptor xử lý request trước khi gửi đi
+    axiosJWT.interceptors.request.use(
+        async (config) => {
+            // Giải mã accessToken
+            if (currentUser) {
+                const decodeToken = jwtDecode(currentUser?.accessToken);
+                if (decodeToken.exp <= Math.floor(Date.now() / 1000)) {
+                    try {
+                        const response = await axios.post(`http://localhost:8000/user/refresh/${currentUser._id}`, null, {
+                            withCredentials: true,
+                        });
+                        const accessTokenNew = response.data.accessToken;
+                        dispatch(loginSuccess({
+                            ...currentUser,
+                            accessToken: accessTokenNew,
+                        }));
+                        config.headers["Authorization"] = `Bearer ${accessTokenNew}`;
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+            }
+            return config; // Trả về config sau khi thay đổi
+        },
+        (error) => {
+            console.log(error)
+            Promise.reject(error)
+        }
+
+    )
 
     const openMenuUser = (e) => {
         setAnchorEl(e.currentTarget);
@@ -303,13 +337,12 @@ export default function AppBar() {
         try {
             const url = `http://localhost:8000/user/logout/${currentUser._id}`
             dispatch(logoutStart());
-            const response = await axios.post(url, null, {
+            const response = await axiosJWT.post(url, null, {
                 headers: {
                     Authorization: `Bearer ${currentUser.accessToken}`
                 },
                 withCredentials: true
             })
-            console.log(response)
             if (response.data.message === "Logged out successfully") {
                 dispatch(logoutSuccess())
                 setTypeMessage("success");
@@ -320,6 +353,7 @@ export default function AppBar() {
                 closeMenuUser();
             }
         } catch (error) {
+            // console.log(error)
             dispatch(logoutFail())
             setTypeMessage("error");
             setTextMessage("Xảy ra lỗi khi đăng xuất");
@@ -331,7 +365,6 @@ export default function AppBar() {
         setAnchorEl(null);
         navigate('/thong-tin-ca-nhan');
     }
-
 
     return (
         <>
