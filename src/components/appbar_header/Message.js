@@ -4,22 +4,22 @@ import './styles.scss'
 import MuiAlert from '@mui/material/Alert';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const Message = ({ open, onClose, typeMessage, textMessage }) => {
-    return (
-        <Snackbar
-            open={open}
-            autoHideDuration={2000}
-            onClose={onClose}
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        >
-            <Alert onClose={onClose} severity={typeMessage}>
-                {textMessage}
-            </Alert>
-        </Snackbar>
-    );
+  return (
+    <Snackbar
+      open={open}
+      autoHideDuration={2000}
+      onClose={onClose}
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+    >
+      <Alert onClose={onClose} severity={typeMessage}>
+        {textMessage}
+      </Alert>
+    </Snackbar>
+  );
 };
 
 export default Message;

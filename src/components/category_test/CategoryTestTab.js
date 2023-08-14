@@ -9,42 +9,42 @@ import ContentTabTwo from './ContentTabTwo';
 // import AnimationsFadeTop from '../../animations/AnimationsFadeTop';
 
 export default function CategoryTestTab() {
-    const [value, setValue] = React.useState('1');
+  const [value, setValue] = React.useState('1');
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
-    return (
-        <Box sx={{ width: '100%', typography: 'body1' }}>
-            <TabContext value={value}>
-                <Box>
-                    {/* <AnimationsFadeTop elementID={"category-test-tablist"}> */}
-                    <div data-aos="fade-down" data-aos-duration="1500">
-                        <TabList
-                            id="category-test-tablist"
-                            centered
-                            onChange={handleChange}
-                            aria-label="tab-category-test"
-                            sx={{ color: '#009D9D' }}
-                            textColor='inherit'
-                            TabIndicatorProps={{
-                                style: {
-                                    backgroundColor: '#009D9D',
-                                    border: '2px solid',
-                                },
-                            }}
+  return (
+    <Box sx={{ width: '100%', typography: 'body1' }}>
+      <TabContext value={value}>
+        <Box>
+          {/* <AnimationsFadeTop elementID={"category-test-tablist"}> */}
+          <div data-aos="fade-down" data-aos-duration="1500">
+            <TabList
+              id="category-test-tablist"
+              centered
+              onChange={handleChange}
+              aria-label="tab-category-test"
+              sx={{ color: '#009D9D' }}
+              textColor='inherit'
+              TabIndicatorProps={{
+                style: {
+                  backgroundColor: '#009D9D',
+                  border: '2px solid',
+                },
+              }}
 
-                        >
-                            <Tab label="Đề thi ĐGNL" value="1" sx={{ fontWeight: 'bold', fontSize: '24px' }} />
-                            <Tab label="Luyện thi THPT" value="2" sx={{ fontWeight: 'bold', fontSize: '24px' }} />
-                        </TabList>
-                    </div>
-                    {/* </AnimationsFadeTop> */}
-                </Box>
-                <TabPanel value="1"><ContentTabOne /></TabPanel>
-                <TabPanel value="2"><ContentTabTwo /></TabPanel>
-            </TabContext>
+            >
+              <Tab label="Đề thi ĐGNL" value="1" sx={{ fontWeight: 'bold', fontSize: '24px' }} />
+              <Tab label="Luyện thi THPT" value="2" sx={{ fontWeight: 'bold', fontSize: '24px' }} />
+            </TabList>
+          </div>
+          {/* </AnimationsFadeTop> */}
         </Box>
-    );
+        <TabPanel value="1"><ContentTabOne /></TabPanel>
+        <TabPanel value="2"><ContentTabTwo /></TabPanel>
+      </TabContext>
+    </Box>
+  );
 }
