@@ -1,18 +1,14 @@
+import React from 'react'
 import { Grid } from '@mui/material'
 import './styles.scss'
-// import AnimationsZoom from '../../animations/AnimationsZoom'
 
-export default function HomeBase() {
+const HomeBase: React.FC = () => {
   return (
     <>
       <div className="home-base" id="home-base">
-        {/* <AnimationsZoom elementID={"home-base"}> */}
         <div data-aos="zoom-in" data-aos-duration="1500">
           <h1>Nền tảng Học Thông Minh có gì?</h1>
         </div>
-
-        {/* </AnimationsZoom> */}
-
         <div className="infor-home-base">
           <Grid
             container
@@ -52,3 +48,5 @@ export default function HomeBase() {
     </>
   )
 }
+
+export default HomeBase

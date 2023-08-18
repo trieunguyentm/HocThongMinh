@@ -1,14 +1,21 @@
+import React from 'react';
 import { Button, MenuItem } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 
-export default function ListButton({ pages, open, handleCloseMenu }) {
+interface ListButtonProps {
+  pages: string[];
+  open: boolean;
+  handleCloseMenu: () => void;
+}
+
+const ListButton: React.FC<ListButtonProps> = ({ pages, open, handleCloseMenu }) => {
   const navigate = useNavigate();
 
   return (
     <>
       {
-        pages.map((item, index) => {
-          function handleClickClass() {
+        pages.map((item: string, index: number) => {
+          const handleClickClass = () => {
             // Lấy ra số lớp
             const nameClass = item.split(" ")[1];
             // Chuyển đến trang tương ứng
@@ -28,3 +35,5 @@ export default function ListButton({ pages, open, handleCloseMenu }) {
     </>
   )
 }
+
+export default ListButton;

@@ -1,9 +1,17 @@
+import React from "react";
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import './styles.scss'
 
-export default function CardCourse({ altImg, linkImg, describe, index }) {
-  const colorImg = ["#009D9D",
+interface CardCourseProps {
+  altImg: string,
+  linkImg: string,
+  describe: string,
+  index: number,
+}
+
+const CardCourse: React.FC<CardCourseProps> = ({ altImg, linkImg, describe, index }) => {
+  const colorImg: string[] = ["#009D9D",
     "rgb(85, 187, 126)",
     "rgb(245, 183, 61)",
     "rgb(245, 133, 81)",
@@ -45,3 +53,5 @@ export default function CardCourse({ altImg, linkImg, describe, index }) {
     </div>
   )
 }
+
+export default CardCourse

@@ -1,8 +1,9 @@
+import React from 'react'
 import { Container } from '@mui/system'
-import './styles.scss'
 import CategoryTestTab from './CategoryTestTab'
+import './styles.scss'
 
-export default function CategoryTest() {
+const CategoryTest: React.FC = () => {
   return (
     <div className="category-test">
       <Container className="category-test-container">
@@ -11,3 +12,5 @@ export default function CategoryTest() {
     </div>
   )
 }
+
+export default CategoryTest

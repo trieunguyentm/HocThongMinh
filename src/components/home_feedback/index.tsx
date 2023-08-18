@@ -1,3 +1,4 @@
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import CardHomeFeedBack from "./CardHomeFeedBack";
@@ -5,10 +6,9 @@ import './styles.scss'
 import { useState } from "react";
 import { useMediaQuery } from "@mui/material";
 import { Autoplay } from "swiper";
-// import AnimationsFadeTop from "../../animations/AnimationsFadeTop";
 
-export default function HomeFeedBack() {
-  const arrLinkImg =
+const HomeFeedBack: React.FC = () => {
+  const arrLinkImg: string[] =
     [
       "https://hocthongminh.com/images/trungkien.svg",
       "https://hocthongminh.com/images/phuonglinh.svg",
@@ -19,7 +19,7 @@ export default function HomeFeedBack() {
       "https://hocthongminh.com/images/dieuhuong.svg",
       "https://hocthongminh.com/images/maianh.svg",
     ];
-  const arrName =
+  const arrName: string[] =
     [
       "Nguyễn Phúc Trung Kiên",
       "Nguyễn Phương Linh",
@@ -30,8 +30,8 @@ export default function HomeFeedBack() {
       "Nguyễn Diệu Hương",
       "Trần Lê Mai Anh",
     ];
-  const arrRating = [5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4,];
-  const arrContent =
+  const arrRating: number[] = [5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4,];
+  const arrContent: string[] =
     [
       "Mình nhận thấy web thực sự hữu ích cho học sinh, giao diện thân thiện, bài tập chi tiết và rõ ràng giúp các con dễ dàng luyện tập.",
       "Trang web có kho đề rất phong phú, đa dạng, giao diện đẹp. Mình thấy luyện tập ở đây giúp việc học dễ dàng, hiệu quả hơn.",
@@ -43,20 +43,18 @@ export default function HomeFeedBack() {
       "Nội dung bài tập rất hữu ích, mình thường xuyên luyện tập trên web tại nhà ❤️",
     ];
 
-  const [hightLightIndex, setHightLightIndex] = useState(0);
+  const [hightLightIndex, setHightLightIndex] = useState<number>(0);
 
   // Sử dụng useMediaQuery để kiểm tra kích thước màn hình
-  const isSmallScreen = useMediaQuery('(max-width: 750px)');
+  const isSmallScreen: boolean = useMediaQuery('(max-width: 750px)');
   // Số slide trên 1 view
-  const slidesPerView = isSmallScreen ? 1 : 3;
+  const slidesPerView: number = isSmallScreen ? 1 : 3;
 
   return (
     <div className="home-feedback">
-      {/* <AnimationsFadeTop elementID={"home-feedback-title"}> */}
       <div data-aos="zoom-in" data-aos-duration="1500">
         <h1 style={{ textAlign: "center" }} id="home-feedback-title">Mọi người nghĩ gì về chúng tôi</h1>
       </div>
-      {/* </AnimationsFadeTop> */}
       <div className="home-feedback-slide" style={{ height: '100%' }}>
         <Swiper
           style={{ height: '100%' }}
@@ -64,7 +62,6 @@ export default function HomeFeedBack() {
           spaceBetween={10}
           loop={true}
           onRealIndexChange={(swiper) => {
-            // console.log(swiper.realIndex);
             setHightLightIndex(swiper.realIndex);
           }}
           autoplay={{
@@ -150,3 +147,5 @@ export default function HomeFeedBack() {
     </div>
   )
 }
+
+export default HomeFeedBack

@@ -1,6 +1,7 @@
+import React from 'react'
 import './styles.scss'
 
-export default function Banner() {
+const Banner: React.FC = () => {
   return (
     <div className="banner">
       <img
@@ -11,3 +12,5 @@ export default function Banner() {
     </div>
   )
 }
+
+export default Banner

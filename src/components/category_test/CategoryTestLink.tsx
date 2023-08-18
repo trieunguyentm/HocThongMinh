@@ -1,7 +1,12 @@
+import React from "react"
 import { Button } from "@mui/material";
 import './styles.scss'
 
-export default function CategoryTestLink({ name }) {
+interface CategoryTestLinkProps {
+  name: string
+}
+
+const CategoryTestLink: React.FC<CategoryTestLinkProps> = ({ name }) => {
   return (
     <>
       <Button
@@ -15,3 +20,5 @@ export default function CategoryTestLink({ name }) {
     </>
   )
 }
+
+export default CategoryTestLink

@@ -1,6 +1,12 @@
+import React from 'react'
 import './styles.css'
 
-export default function CardHomeUtils({ srcImg, text }) {
+interface CardHomeUtilsProps {
+  srcImg: string;
+  text: string;
+}
+
+const CardHomeUtils: React.FC<CardHomeUtilsProps> = ({ srcImg, text }) => {
   return (
     <div
       style={{
@@ -28,3 +34,5 @@ export default function CardHomeUtils({ srcImg, text }) {
     </div>
   )
 }
+
+export default CardHomeUtils

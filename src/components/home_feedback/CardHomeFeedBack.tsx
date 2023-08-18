@@ -1,7 +1,16 @@
+import React from "react";
 import { CardContent, CardMedia, Rating, Typography } from "@mui/material";
 import './styles.scss'
 
-export default function CardHomeFeedBack({ linkImg, name, rating, content, hightLight }) {
+interface CardHomeFeedBackProps {
+  linkImg: string,
+  name: string,
+  rating: number,
+  content: string,
+  hightLight: boolean
+}
+
+const CardHomeFeedBack: React.FC<CardHomeFeedBackProps> = ({ linkImg, name, rating, content, hightLight }) => {
   return (
     <div className="container-card-home-feedback" style={{ scale: `${hightLight ? "1.06" : "0.9"}` }}>
       <div style={{ height: '100%' }} className="card-home-feedback">
@@ -41,3 +50,5 @@ export default function CardHomeFeedBack({ linkImg, name, rating, content, hight
     </div >
   )
 }
+
+export default CardHomeFeedBack

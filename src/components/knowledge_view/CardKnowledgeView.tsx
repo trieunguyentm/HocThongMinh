@@ -1,7 +1,13 @@
+import React from 'react'
 import { Card, CardMedia } from "@mui/material";
 import './styles.scss'
 
-export default function CardKnowledgeView({ linkImg, title, content }) {
+interface CardKnowledgeViewProps {
+  linkImg: string;
+  title: string;
+  content: string;
+}
+const CardKnowledgeView: React.FC<CardKnowledgeViewProps> = ({ linkImg, title, content }) => {
   return (
     <div data-aos="zoom-in" data-aos-duration="1500">
       <Card className="card-knowledge">
@@ -24,3 +30,5 @@ export default function CardKnowledgeView({ linkImg, title, content }) {
     </div>
   )
 }
+
+export default CardKnowledgeView;

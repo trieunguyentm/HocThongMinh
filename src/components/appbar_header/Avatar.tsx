@@ -1,12 +1,11 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
-function stringToColor(string) {
+function stringToColor(string: string) {
   let hash = 0;
   let i;
-
-  /* eslint-disable no-bitwise */
   for (i = 0; i < string?.length; i += 1) {
     hash = string.charCodeAt(i) + ((hash << 5) - hash);
   }
@@ -17,14 +16,17 @@ function stringToColor(string) {
     const value = (hash >> (i * 8)) & 0xff;
     color += `00${value.toString(16)}`.slice(-2);
   }
-  /* eslint-enable no-bitwise */
 
   return color;
 }
 
-export default function LetterAvatars({ size }) {
+interface LetterAvatarsProps {
+  size?: number
+}
+
+const LetterAvatars: React.FC<LetterAvatarsProps> = ({ size }) => {
   // Lấy state từ store
-  const currentUser = useSelector((state) => state.auth.login.currentUser);
+  const currentUser = useSelector((state: RootState) => state.auth.login.currentUser);
   if (currentUser !== null) {
     const words = currentUser?.name.split(" ");
     // Set name
@@ -40,3 +42,5 @@ export default function LetterAvatars({ size }) {
   }
 
 }
+
+export default LetterAvatars

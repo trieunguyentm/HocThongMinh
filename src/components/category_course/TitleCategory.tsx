@@ -1,6 +1,7 @@
+import React from 'react'
 import './styles.scss'
 
-export default function TitleCategory() {
+const TitleCategory: React.FC = () => {
   return (
     <>
       <div className="title-category">
@@ -15,3 +16,5 @@ export default function TitleCategory() {
     </>
   )
 }
+
+export default TitleCategory

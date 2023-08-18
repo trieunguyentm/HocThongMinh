@@ -1,8 +1,9 @@
+import React from 'react';
 import './styles.scss'
 import PlaceIcon from '@mui/icons-material/Place';
 import EmailIcon from '@mui/icons-material/Email';
 
-export default function Footer() {
+const Footer: React.FC = () => {
   return (
     <div className="footer">
       <div className="footer-hocthongminh">
@@ -125,3 +126,5 @@ export default function Footer() {
     </div >
   )
 }
+
+export default Footer

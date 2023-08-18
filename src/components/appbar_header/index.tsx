@@ -3,63 +3,76 @@ import * as React from 'react';
 import './styles.scss'
 import { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import Message from './Message';
 import { useDispatch, useSelector } from 'react-redux';
-import LetterAvatars from './Avatar.js'
+import LetterAvatars from './Avatar'
 import PersonIcon from '@mui/icons-material/Person';
 import SchoolIcon from '@mui/icons-material/School';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useNavigate } from 'react-router-dom';
+
 import { loginFail, loginStart, loginSuccess, logoutFail, logoutStart, logoutSuccess, signupStart } from '../../redux/slices/authSlice';
 import jwtDecode from 'jwt-decode';
 import CryptoJS from 'crypto-js';
 import { useForm } from 'react-hook-form';
+import { RootState } from '../../redux/store';
+import { useNavigate } from 'react-router-dom';
 
-const axiosJWT = axios.create();
+const axiosJWT: AxiosInstance = axios.create();
 
-export default function AppBar() {
+const AppBar = () => {
   const navigate = useNavigate();
   // Redux
   const dispatch = useDispatch();
   // Lấy state từ store
-  const currentUser = useSelector((state) => state.auth.login.currentUser);
+  const currentUser = useSelector((state: RootState) => state.auth.login.currentUser);
   // Trạng thái đăng nhập
-  const [status, setStatus] = useState(currentUser ? true : false);
+  const [status, setStatus] = useState<boolean>(currentUser ? true : false);
   // Đóng mở dialog
-  const [openDialogSignIn, setOpenDialogSignIn] = useState(false);
-  const [openDialogSignUp, setOpenDialogSignUp] = useState(false);
+  const [openDialogSignIn, setOpenDialogSignIn] = useState<boolean>(false);
+  const [openDialogSignUp, setOpenDialogSignUp] = useState<boolean>(false);
   // Đăng nhập
-  const [signInUser, setSignInUser] = useState("");
-  const [errorSignInUser, setErrorSignInUser] = useState(false);
-  const [signInPassword, setSignInPassword] = useState("");
-  const [errorSignInPassword, setErrorSignInPassword] = useState(false);
+  const [signInUser, setSignInUser] = useState<string>("");
+  const [errorSignInUser, setErrorSignInUser] = useState<boolean>(false);
+  const [signInPassword, setSignInPassword] = useState<string>("");
+  const [errorSignInPassword, setErrorSignInPassword] = useState<boolean>(false);
   // Đăng ký
-  const [signUpClass, setSignUpClass] = useState("Chọn lớp của bạn");
-  const [errorSignUpClass, setErrorSignUpClass] = useState(false);
+  const [signUpClass, setSignUpClass] = useState<string>("Chọn lớp của bạn");
+  const [errorSignUpClass, setErrorSignUpClass] = useState<boolean>(false);
   // Text lỗi
-  const [textErrorClass, setTextErrorClass] = useState("");
+  const [textErrorClass, setTextErrorClass] = useState<string>("");
   // Mở và đóng Message
-  const [openMessage, setOpenMessage] = useState(false);
-  const [typeMessage, setTypeMessage] = useState("success");
-  const [textMessage, setTextMessage] = useState("");
+  const [openMessage, setOpenMessage] = useState<boolean>(false);
+  const [typeMessage, setTypeMessage] = useState<string>("success");
+  const [textMessage, setTextMessage] = useState<string>("");
   // Click User
-  const [anchorEl, setAnchorEl] = useState(null);
-  const statusOpenMenu = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const statusOpenMenu: boolean = Boolean(anchorEl);
 
   // Đối với Form SignUp
   const { register: registerFormSignUp, handleSubmit: handleSubmitFormSignUp, formState: { errors: errorsFormSignUp } } = useForm({
     mode: "all"
   });
 
-  const onSubmitFormSignUp = (data) => console.log(data);
+  const onSubmitFormSignUp = (data: any) => console.log(data);
+
+  const getOpacityElement = (idElement: string) => {
+    const element = document.getElementById(idElement) as HTMLInputElement | null
+    if (!element) {
+      return 0.5;
+    }
+    else {
+      if (element.value) return 1
+      else return 0.5
+    }
+  }
 
   // Tạo axios Interceptor xử lý request trước khi gửi đi
   axiosJWT.interceptors.request.use(
     async (config) => {
       // Giải mã accessToken
       if (currentUser) {
-        const decodeToken = jwtDecode(currentUser?.accessToken);
+        const decodeToken: { foo: string, exp: number, iat: number } = jwtDecode(currentUser?.accessToken);
         if (decodeToken.exp <= Math.floor(Date.now() / 1000)) {
           try {
             const response = await axios.post(`http://localhost:8000/user/refresh/${currentUser._id}`, null, {
@@ -84,7 +97,7 @@ export default function AppBar() {
     }
   )
 
-  const openMenuUser = (e) => {
+  const openMenuUser = (e: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(e.currentTarget);
   }
 
@@ -92,17 +105,16 @@ export default function AppBar() {
     setAnchorEl(null);
   }
 
-  const checkSignUpUser = (signUpUser) => {
+  const checkSignUpUser = (signUpUser: string): boolean | string => {
     var regexUser = /^[a-z0-9]+$/;
     if (!regexUser.test(signUpUser) && signUpUser !== "") {
-      return "Tên tài khoản không được chứa ký tự đặc biệt!"
+      return "Tên tài khoản không được chứa ký tự đặc biệt!";
+    } else {
+      return false;
     }
-    else {
-      return false
-    }
-  }
+  };
 
-  const checkSignUpPassword = (signUpPassword) => {
+  const checkSignUpPassword = (signUpPassword: string): boolean | string => {
     if (signUpPassword.length > 0 && signUpPassword.length < 6) {
       return "Mật khẩu phải có ít nhất 6 ký tự!"
     }
@@ -111,21 +123,24 @@ export default function AppBar() {
     }
   }
 
-  const checkSignUpConfirmPassword = (signUpConfirmPassword) => {
-    // Check confirm
-    if (signUpConfirmPassword.length > 0 && signUpConfirmPassword.length < 6) {
-      return "Mật khẩu phải có ít nhất 6 ký tự!"
+  const checkSignUpConfirmPassword = (signUpConfirmPassword: string): boolean | string => {
+    const signUpPasswordElement = document.getElementById('signUpPassword') as HTMLInputElement | null;
+    if (!signUpPasswordElement) {
+      return "Mật khẩu không tồn tại!";
     }
-    else if (signUpConfirmPassword !== document.getElementById('signUpPassword').value && signUpConfirmPassword !== "") {
-      return "Xác nhận mật khẩu không đúng!"
+
+    if (signUpConfirmPassword.length > 0 && signUpConfirmPassword.length < 6) {
+      return "Mật khẩu phải có ít nhất 6 ký tự!";
+    }
+    else if (signUpConfirmPassword !== signUpPasswordElement.value && signUpConfirmPassword !== "") {
+      return "Xác nhận mật khẩu không đúng!";
     }
     else {
-      return false
+      return false;
     }
   }
 
-  const checkSignUpEmail = (signUpEmail) => {
-    // Check email
+  const checkSignUpEmail = (signUpEmail: string): string | boolean => {
     var regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (!regexEmail.test(signUpEmail) && signUpEmail !== "") {
       return "Email không tồn tại!"
@@ -135,8 +150,7 @@ export default function AppBar() {
     }
   }
 
-  const checkSignUpPhone = (signUpPhone) => {
-    // Check phone
+  const checkSignUpPhone = (signUpPhone: string): string | boolean => {
     var regexPhone = /^[0-9]+$/;
     if (signUpPhone !== "" && (signUpPhone.length < 10 || signUpPhone.length > 11 || signUpPhone[0] !== '0' || !regexPhone.test(signUpPhone))) {
       return "Số điện thoại không tồn tại!"
@@ -166,7 +180,7 @@ export default function AppBar() {
     setOpenDialogSignUp(true);
     setSignUpClass("Chọn lớp của bạn");
     setErrorSignUpClass(false);
-  }
+  };
   // Xử lý signin
   const handleClickSignIn = async () => {
     if (signInUser === "") {
@@ -182,7 +196,13 @@ export default function AppBar() {
     ) {
       try {
         const url = "http://localhost:8000/auth/signin"
-        const passwordEncode = CryptoJS.AES.encrypt(signInPassword, process.env.REACT_APP_API_KEY).toString()
+
+        const apiKey = process.env.REACT_APP_API_KEY;
+        if (!apiKey) {
+          throw new Error("REACT_APP_API_KEY is not defined");
+        }
+
+        const passwordEncode = CryptoJS.AES.encrypt(signInPassword, apiKey).toString()
         const dataSend = {
           usernameStudent: signInUser,
           passwordStudent: passwordEncode,
@@ -192,7 +212,7 @@ export default function AppBar() {
           withCredentials: true
         });
         // Đăng nhập thành công, lưu thông tin người dùng bằng Redux
-        if (response.data.message === "Login Successfully") {
+        if (response.data.code === 0) {
           dispatch(loginSuccess(response.data.user))
           setTypeMessage("success");
           setTextMessage("Đăng nhập thành công!");
@@ -200,14 +220,14 @@ export default function AppBar() {
           setOpenDialogSignIn(false);
           setStatus(true);
         }
-      } catch (error) {
+      } catch (error: any) {
         dispatch(loginFail());
-        if (error.response?.data?.message === "User not found") {
+        if (error.response?.data?.code === 1) {
           setTypeMessage("error");
           setTextMessage("Tài khoản không tồn tại!");
           setOpenMessage(true);
         }
-        else if (error.response?.data?.message === "Incorrect password") {
+        else if (error.response?.data?.code === 2) {
           setTypeMessage("error");
           setTextMessage("Mật khẩu không chính xác!");
           setOpenMessage(true);
@@ -236,29 +256,77 @@ export default function AppBar() {
       errorsFormSignUp?.signUpPhone?.message === "" &&
       signUpClass !== "Chọn lớp của bạn"
     ) {
-
       try {
-        const passwordEncode = CryptoJS.AES.encrypt(document.getElementById('signUpPassword')?.value, process.env.REACT_APP_API_KEY).toString()
+        const signUpPasswordElement = document.getElementById('signUpPassword') as HTMLInputElement | null;
+        const signUpUserElement = document.getElementById('signUpUser') as HTMLInputElement | null;
+        const signUpNameElement = document.getElementById('signUpName') as HTMLInputElement | null;
+        const signUpEmailElement = document.getElementById('signUpEmail') as HTMLInputElement | null;
+        const signUpPhoneElement = document.getElementById('signUpPhone') as HTMLInputElement | null;
+
+        if (!signUpPasswordElement || !signUpUserElement || !signUpNameElement || !signUpEmailElement || !signUpPhoneElement) {
+          throw new Error("One or more elements not found.");
+        }
+
+        const apiKey = process.env.REACT_APP_API_KEY;
+        if (!apiKey) {
+          throw new Error("REACT_APP_API_KEY is not defined");
+        }
+
+        const passwordEncode = CryptoJS.AES.encrypt(signUpPasswordElement.value, apiKey).toString()
         const url = "http://localhost:8000/auth/signup"
         const dataSend = {
-          usernameStudent: document.getElementById('signUpUser')?.value,
-          nameStudent: document.getElementById('signUpName')?.value,
+          usernameStudent: signUpUserElement.value,
+          nameStudent: signUpNameElement.value,
           passwordStudent: passwordEncode,
-          emailStudent: document.getElementById('signUpEmail')?.value,
-          phoneStudent: document.getElementById('signUpPhone')?.value,
+          emailStudent: signUpEmailElement.value,
+          phoneStudent: signUpPhoneElement.value,
           classStudent: signUpClass,
         }
         dispatch(signupStart())
         const response = await axios.post(url, dataSend, {
           withCredentials: true
         })
-        if (response.data.message === "Signup succesfully") {
+        if (response.data.code === 0) {
           setTypeMessage("success");
           setTextMessage("Đăng ký tài khoản thành công!");
           setOpenMessage(true);
           setOpenDialogSignUp(false);
+          // Đăng nhập luôn sau khi đăng ký thành công
+          try {
+            const url = "http://localhost:8000/auth/signin"
+            const passwordEncodeSignIn = CryptoJS.AES.encrypt(signUpPasswordElement.value, apiKey).toString()
+            const dataSend = {
+              usernameStudent: signUpUserElement.value,
+              passwordStudent: passwordEncodeSignIn,
+            }
+            dispatch(loginStart())
+            const response = await axios.post(url, dataSend, {
+              withCredentials: true
+            });
+            // Đăng nhập thành công, lưu thông tin người dùng bằng Redux
+            if (response.data.code === 0) {
+              dispatch(loginSuccess(response.data.user))
+              setTypeMessage("success");
+              setTextMessage("Đăng nhập thành công!");
+              setOpenMessage(true);
+              setOpenDialogSignIn(false);
+              setStatus(true);
+            }
+          } catch (error: any) {
+            dispatch(loginFail());
+            if (error.response?.data?.code === 1) {
+              setTypeMessage("error");
+              setTextMessage("Tài khoản không tồn tại!");
+              setOpenMessage(true);
+            }
+            else if (error.response?.data?.code === 2) {
+              setTypeMessage("error");
+              setTextMessage("Mật khẩu không chính xác!");
+              setOpenMessage(true);
+            }
+          }
         }
-      } catch (error) {
+      } catch (error: any) {
         if (error.response.data.index === 0) {
           setTypeMessage("error");
           setTextMessage("Tên người dùng đã tồn tại!");
@@ -571,16 +639,17 @@ export default function AppBar() {
                             id="signUpUser"
                             className="data-signup"
                             style={{
-                              opacity: `${document.getElementById('signUpUser')?.value ? 1 : 0.5}`
+                              // opacity: `${document.getElementById('signUpUser')?.value ? 1 : 0.5}`
+                              opacity: getOpacityElement('signUpUser')
                             }}
                             type="text"
                             placeholder="Nhập tài khoản"
                           />
                         </div>
                         {
-                          errorsFormSignUp?.signUpUser?.message && (
+                          errorsFormSignUp?.signUpUser?.message && typeof errorsFormSignUp.signUpUser.message === 'string' && (
                             <div className='error-data'>
-                              {errorsFormSignUp?.signUpUser?.message}
+                              {errorsFormSignUp.signUpUser.message}
                             </div>
                           )
                         }
@@ -603,16 +672,17 @@ export default function AppBar() {
                             id="signUpName"
                             className="data-signup"
                             style={{
-                              opacity: `${document.getElementById('signUpName')?.value ? 1 : 0.5}`
+                              // opacity: `${document.getElementById('signUpName')?.value ? 1 : 0.5}`
+                              opacity: getOpacityElement('signUpName')
                             }}
                             type="text"
                             placeholder="Nhập tên"
                           />
                         </div>
                         {
-                          errorsFormSignUp?.signUpName?.message && (
+                          errorsFormSignUp?.signUpName?.message && typeof errorsFormSignUp.signUpName.message === 'string' && (
                             <div className='error-data'>
-                              {errorsFormSignUp?.signUpName?.message}
+                              {errorsFormSignUp.signUpName.message}
                             </div>
                           )
                         }
@@ -636,16 +706,17 @@ export default function AppBar() {
                             id='signUpPassword'
                             className="data-signup"
                             style={{
-                              opacity: `${document.getElementById('signUpPassword')?.value ? 1 : 0.5}`
+                              // opacity: `${document.getElementById('signUpPassword')?.value ? 1 : 0.5}`
+                              opacity: getOpacityElement('signUpPassword')
                             }}
                             type="password"
                             placeholder="Nhập mật khẩu"
                           />
                         </div>
                         {
-                          errorsFormSignUp?.signUpPassword?.message && (
+                          errorsFormSignUp?.signUpPassword?.message && typeof errorsFormSignUp.signUpPassword.message === 'string' && (
                             <div className='error-data'>
-                              {errorsFormSignUp?.signUpPassword?.message}
+                              {errorsFormSignUp.signUpPassword.message}
                             </div>
                           )
                         }
@@ -669,16 +740,17 @@ export default function AppBar() {
                             id='signUpConfirmPassword'
                             className="data-signup"
                             style={{
-                              opacity: `${document.getElementById('signUpConfirmPassword')?.value ? 1 : 0.5}`
+                              // opacity: `${document.getElementById('signUpConfirmPassword')?.value ? 1 : 0.5}`
+                              opacity: getOpacityElement('signUpConfirmPassword')
                             }}
                             type="password"
                             placeholder="Nhập lại mật khẩu"
                           />
                         </div>
                         {
-                          errorsFormSignUp?.signUpConfirmPassword?.message && (
+                          errorsFormSignUp?.signUpConfirmPassword?.message && typeof errorsFormSignUp.signUpConfirmPassword.message === 'string' && (
                             <div className='error-data'>
-                              {errorsFormSignUp?.signUpConfirmPassword?.message}
+                              {errorsFormSignUp.signUpConfirmPassword.message}
                             </div>
                           )
                         }
@@ -705,16 +777,17 @@ export default function AppBar() {
                           id='signUpEmail'
                           className="data-signup"
                           style={{
-                            opacity: `${document.getElementById('signUpEmail')?.value ? 1 : 0.5}`
+                            // opacity: `${document.getElementById('signUpEmail')?.value ? 1 : 0.5}`
+                            opacity: getOpacityElement('signUpEmail')
                           }}
                           type="text"
                           placeholder="Email"
                         />
                       </div>
                       {
-                        errorsFormSignUp?.signUpEmail?.message && (
+                        errorsFormSignUp?.signUpEmail?.message && typeof errorsFormSignUp.signUpEmail.message === 'string' && (
                           <div className='error-data'>
-                            {errorsFormSignUp?.signUpEmail?.message}
+                            {errorsFormSignUp.signUpEmail.message}
                           </div>
                         )
                       }
@@ -737,16 +810,17 @@ export default function AppBar() {
                           id='signUpPhone'
                           className="data-signup"
                           style={{
-                            opacity: `${document.getElementById('signUpPhone')?.value ? 1 : 0.5}`
+                            // opacity: `${document.getElementById('signUpPhone')?.value ? 1 : 0.5}`
+                            opacity: getOpacityElement('signUpPhone')
                           }}
                           type="text"
                           placeholder="Nhập số điện thoại của bạn"
                         />
                       </div>
                       {
-                        errorsFormSignUp?.signUpPhone?.message && (
+                        errorsFormSignUp?.signUpPhone?.message && typeof errorsFormSignUp.signUpPhone.message === 'string' && (
                           <div className='error-data'>
-                            {errorsFormSignUp?.signUpPhone?.message}
+                            {errorsFormSignUp.signUpPhone.message}
                           </div>
                         )
                       }
@@ -846,3 +920,5 @@ export default function AppBar() {
     </>
   )
 }
+
+export default AppBar

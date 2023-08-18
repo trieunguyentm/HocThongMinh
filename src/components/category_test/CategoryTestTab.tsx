@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -6,12 +6,11 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import ContentTabOne from './ContentTabOne';
 import ContentTabTwo from './ContentTabTwo';
-// import AnimationsFadeTop from '../../animations/AnimationsFadeTop';
 
-export default function CategoryTestTab() {
-  const [value, setValue] = React.useState('1');
+const CategoryTestTab: React.FC = () => {
+  const [value, setValue] = useState<string>('1');
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
@@ -19,7 +18,6 @@ export default function CategoryTestTab() {
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <TabContext value={value}>
         <Box>
-          {/* <AnimationsFadeTop elementID={"category-test-tablist"}> */}
           <div data-aos="fade-down" data-aos-duration="1500">
             <TabList
               id="category-test-tablist"
@@ -40,7 +38,6 @@ export default function CategoryTestTab() {
               <Tab label="Luyện thi THPT" value="2" sx={{ fontWeight: 'bold', fontSize: '24px' }} />
             </TabList>
           </div>
-          {/* </AnimationsFadeTop> */}
         </Box>
         <TabPanel value="1"><ContentTabOne /></TabPanel>
         <TabPanel value="2"><ContentTabTwo /></TabPanel>
@@ -48,3 +45,5 @@ export default function CategoryTestTab() {
     </Box>
   );
 }
+
+export default CategoryTestTab

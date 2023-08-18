@@ -7,50 +7,48 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ListButton from "./ListButton";
 import { useNavigate } from "react-router-dom";
 
-export default function NavBar() {
-  const pages = ["Luyện thi THPTQG", "THCS", "THPT", "Đề thi ĐGNL", "Tài liệu", "Kiến thức", "Thi đấu"];
-  const THCS = ["Lớp 6", "Lớp 7", "Lớp 8", "Lớp 9"];
-  const THPT = ["Lớp 10", "Lớp 11", "Lớp 12"];
-  const [anchorElMenu, setAnchorElMenu] = useState(null);
-  const [anchorElTHCS, setAnchorElTHCS] = useState(null);
-  const [anchorElTHPT, setAnchorElTHPT] = useState(null);
-  const openMenu = Boolean(anchorElMenu);
-  const openTHCS = Boolean(anchorElTHCS);
-  const openTHPT = Boolean(anchorElTHPT);
-  const [openSmallTHCS, setOpenSmallTHCS] = useState(false);
-  const [openSmallTHPT, setOpenSmallTHPT] = useState(false);
+const NavBar: React.FC = () => {
+  const pages: string[] = ["Luyện thi THPTQG", "THCS", "THPT", "Đề thi ĐGNL", "Tài liệu", "Kiến thức", "Thi đấu"];
+  const THCS: string[] = ["Lớp 6", "Lớp 7", "Lớp 8", "Lớp 9"];
+  const THPT: string[] = ["Lớp 10", "Lớp 11", "Lớp 12"];
+  const [anchorElMenu, setAnchorElMenu] = useState<null | HTMLElement>(null);
+  const [anchorElTHCS, setAnchorElTHCS] = useState<null | HTMLElement>(null);
+  const [anchorElTHPT, setAnchorElTHPT] = useState<null | HTMLElement>(null);
+  const openMenu: boolean = Boolean(anchorElMenu);
+  const openTHCS: boolean = Boolean(anchorElTHCS);
+  const openTHPT: boolean = Boolean(anchorElTHPT);
+  const [openSmallTHCS, setOpenSmallTHCS] = useState<boolean>(false);
+  const [openSmallTHPT, setOpenSmallTHPT] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Lấy tất cả các button có className là "button-nav"
-    const buttons = document.querySelectorAll('.button-nav');
+    const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.button-nav');
 
-    // Lặp qua từng button và gắn sự kiện mouseover và mouseout
+    const handleMouseOver = (event: MouseEvent) => {
+      const button = event.target as HTMLButtonElement;
+      button.classList.add('hover');
+    };
+
+    const handleMouseOut = (event: MouseEvent) => {
+      const button = event.target as HTMLButtonElement;
+      button.classList.remove('hover');
+    };
+
     buttons.forEach(button => {
-      button.addEventListener('mouseover', () => {
-        button.classList.add('hover'); // Thêm class "hover"
-      });
-
-      button.addEventListener('mouseout', () => {
-        button.classList.remove('hover'); // Xóa class "hover"
-      });
+      button.addEventListener('mouseover', handleMouseOver);
+      button.addEventListener('mouseout', handleMouseOut);
     });
 
     return () => {
       buttons.forEach(button => {
-        button.removeEventListener('mouseover', () => {
-          button.classList.add('hover'); // Thêm class "hover"
-        });
-
-        button.removeEventListener('mouseout', () => {
-          button.classList.remove('hover'); // Xóa class "hover"
-        });
+        button.removeEventListener('mouseover', handleMouseOver);
+        button.removeEventListener('mouseout', handleMouseOut);
       });
-    }
+    };
 
   }, [])
 
-  const handleClickMenu = (event) => {
+  const handleClickMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElMenu(event.currentTarget);
   };
 
@@ -60,7 +58,7 @@ export default function NavBar() {
     setOpenSmallTHPT(false);
   }
 
-  const handleClickTHCS = (event) => {
+  const handleClickTHCS = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElTHCS(event.currentTarget);
   };
 
@@ -68,7 +66,7 @@ export default function NavBar() {
     setAnchorElTHCS(null);
   }
 
-  const handleClickTHPT = (event) => {
+  const handleClickTHPT = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElTHPT(event.currentTarget);
   }
 
@@ -205,8 +203,6 @@ export default function NavBar() {
               {
                 THCS.map((item, index) => {
                   const handleClick = () => {
-                    // console.log('clicked');
-                    // console.log(item);
                     const nameClass = item.split(" ")[1];
                     navigate(`/lop-${nameClass}`);
                   };
@@ -232,8 +228,6 @@ export default function NavBar() {
               {
                 THPT.map((item) => {
                   const handleClick = () => {
-                    // console.log('clicked');
-                    // console.log(item);
                     const nameClass = item.split(" ")[1];
                     navigate(`/lop-${nameClass}`);
                   }
@@ -255,3 +249,5 @@ export default function NavBar() {
     </div >
   )
 }
+
+export default NavBar;
