@@ -1,32 +1,42 @@
-import { useSelector } from "react-redux";
-import AppBar from "../../components/appbar_header";
-import LetterAvatars from "../../components/appbar_header/Avatar";
-import Footer from "../../components/footer";
-import NavBar from "../../components/navbar_header";
+import React from 'react'
+import { useSelector } from "react-redux"
+import AppBar from "../../components/appbar_header"
+import LetterAvatars from "../../components/appbar_header/Avatar"
+import Footer from "../../components/footer"
+import NavBar from "../../components/navbar_header"
 import './styles.scss'
-import { Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
-import EventIcon from '@mui/icons-material/Event';
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DateField } from "@mui/x-date-pickers/DateField";
-import dayjs from "dayjs";
+import { Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, TextField } from "@mui/material"
+import { useEffect, useState } from "react"
+import EventIcon from '@mui/icons-material/Event'
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
+import { DateField } from "@mui/x-date-pickers/DateField"
+import dayjs from "dayjs"
+import { RootState } from '../../redux/store'
 
-export default function Profile() {
+const Profile: React.FC = () => {
   // Lấy state từ store
-  const currentUser = useSelector((state) => state.auth.login.currentUser);
-  const [sizeAvatar, setSizeAvatar] = useState(150);
-  const [name, setName] = useState(currentUser?.name);
-  const [date, setDate] = useState(dayjs(currentUser?.date ? currentUser.date : ""));
-  const [school, setSchool] = useState(currentUser?.school);
-  const [email, setEmail] = useState(currentUser?.email);
-  const [phone, setPhone] = useState(currentUser?.phone);
-  const [classStudent, setClassStudent] = useState(currentUser?.class);
-  const [gender, setGender] = useState(currentUser?.gender);
-  const [errorEmail, setErrorEmail] = useState("");
-  const [errorPhone, setErrorPhone] = useState("");
+  const currentUser = useSelector((state: RootState) => state.auth.login.currentUser);
+  const [sizeAvatar, setSizeAvatar] = useState<number>(150);
+  const [name, setName] = useState<string>(currentUser?.name || "");
+  const [date, setDate] = useState<dayjs.Dayjs | undefined>(
+    currentUser?.date ? dayjs(currentUser.date) : undefined
+  );
+  const [school, setSchool] = useState<string>(currentUser?.school || "");
+  const [email, setEmail] = useState<string>(currentUser?.email || "");
+  const [phone, setPhone] = useState<string>(currentUser?.phone || "");
+  const [classStudent, setClassStudent] = useState<string>(currentUser?.class || "");
+  const [gender, setGender] = useState<string>(currentUser?.gender || "");
+  const [errorEmail, setErrorEmail] = useState<string>("");
+  const [errorPhone, setErrorPhone] = useState<string>("");
 
-  const classArr = [
+
+  interface classArrType {
+    value: string,
+    label: string
+  }
+
+  const classArr: classArrType[] = [
     {
       value: "Chọn lớp của bạn",
       label: "Chọn lớp của bạn",
@@ -62,10 +72,6 @@ export default function Profile() {
   ]
 
   useEffect(() => {
-    console.log("currentUser:", currentUser);
-  })
-
-  useEffect(() => {
     const updateSizeAvatar = () => {
       const windowWidth = window.innerWidth;
       if (windowWidth < 685) {
@@ -88,7 +94,7 @@ export default function Profile() {
   useEffect(() => {
     // Check email
     var regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if (!regexEmail.test(email) && email !== "") {
+    if (email !== undefined && !regexEmail.test(email) && email !== "") {
       setErrorEmail("Email không đúng!")
     }
     else {
@@ -99,12 +105,14 @@ export default function Profile() {
   useEffect(() => {
     // Check phone
     var regexPhone = /^[0-9]+$/;
-    if (phone !== "" && phone !== undefined && (phone.length < 10 || phone.length > 11 || phone[0] !== '0' || !regexPhone.test(phone))) {
+
+    if (phone !== null && phone !== "" && phone !== undefined && (phone.length < 10 || phone.length > 11 || phone[0] !== '0' || !regexPhone.test(phone))) {
       setErrorPhone("Số điện thoại không đúng!")
     }
     else {
       setErrorPhone("");
     }
+
   }, [phone])
 
   return (
@@ -149,7 +157,7 @@ export default function Profile() {
                           }}
                         >
                           <p style={{ maxWidth: '100%' }}>
-                            {currentUser.email}
+                            {currentUser.email || ""}
                           </p>
                         </div>
                       </div>
@@ -167,7 +175,7 @@ export default function Profile() {
                                     style={{ width: '22px', height: '22px', marginRight: '10px' }} />,
                                   disableUnderline: true,
                                 }}
-                                value={name}
+                                value={name || ""}
                                 onChange={(e) => setName(e.target.value)}
                               />
                             </div>
@@ -176,8 +184,12 @@ export default function Profile() {
                               <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DateField
                                   variant="standard"
-                                  value={date}
-                                  onChange={(newValue) => setDate(newValue)}
+                                  value={date || ""}
+                                  onChange={(newValue) => {
+                                    if (newValue instanceof dayjs || newValue === undefined) {
+                                      setDate(newValue);
+                                    }
+                                  }}
                                   format="DD/MM/YYYY"
                                   InputProps={{
                                     disableUnderline: true, // <== added this
@@ -228,7 +240,7 @@ export default function Profile() {
                                     style={{ width: '22px', height: '22px', marginRight: '10px' }} />,
                                   disableUnderline: true, // <== added this
                                 }}
-                                value={email}
+                                value={email || ""}
                                 onChange={(e) => setEmail(e.target.value)}
                               />
                             </div>
@@ -247,7 +259,7 @@ export default function Profile() {
                                     style={{ width: '22px', height: '22px', marginRight: '10px' }} />,
                                   disableUnderline: true, // <== added this
                                 }}
-                                value={phone}
+                                value={phone || ""}
                                 onChange={(e) => setPhone(e.target.value)}
                               />
                             </div>
@@ -352,3 +364,5 @@ export default function Profile() {
     </>
   )
 }
+
+export default Profile

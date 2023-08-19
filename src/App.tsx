@@ -8,11 +8,10 @@ import store from './redux/store';
 import Profile from './pages/profile';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react'
-import MyPage from './Test';
 
 let persistor = persistStore(store)
 
-export default function App() {
+const App: React.FC = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -27,7 +26,6 @@ export default function App() {
             <Route path="/lop-11" element={<ClassPage classPage="11" />} />
             <Route path="/lop-12" element={<ClassPage classPage="12" />} />
             <Route path="/thong-tin-ca-nhan" element={<Profile />} />
-            <Route path="/test" element={<MyPage />} />
             <Route path="*" element={<Navigate replace to="/" />} />
           </Routes>
         </BrowserRouter>
@@ -35,4 +33,6 @@ export default function App() {
     </Provider>
   )
 }
+
+export default App
 

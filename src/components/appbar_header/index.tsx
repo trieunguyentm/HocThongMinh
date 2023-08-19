@@ -11,7 +11,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import SchoolIcon from '@mui/icons-material/School';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import { loginFail, loginStart, loginSuccess, logoutFail, logoutStart, logoutSuccess, signupStart } from '../../redux/slices/authSlice';
+import { loginFail, loginStart, loginSuccess, logoutFail, logoutStart, logoutSuccess, signupStart, signupSuccess } from '../../redux/slices/authSlice';
 import jwtDecode from 'jwt-decode';
 import CryptoJS from 'crypto-js';
 import { useForm } from 'react-hook-form';
@@ -79,11 +79,11 @@ const AppBar = () => {
               withCredentials: true,
             });
             const accessTokenNew = response.data.accessToken;
+            config.headers["Authorization"] = `Bearer ${accessTokenNew}`;
             dispatch(loginSuccess({
               ...currentUser,
               accessToken: accessTokenNew,
             }));
-            config.headers["Authorization"] = `Bearer ${accessTokenNew}`;
           } catch (error) {
             console.log(error);
           }
@@ -112,6 +112,10 @@ const AppBar = () => {
     } else {
       return false;
     }
+  };
+
+  const checkSignUpName = (signUpName: string): boolean => {
+    return true
   };
 
   const checkSignUpPassword = (signUpPassword: string): boolean | string => {
@@ -287,6 +291,7 @@ const AppBar = () => {
           withCredentials: true
         })
         if (response.data.code === 0) {
+          dispatch(signupSuccess())
           setTypeMessage("success");
           setTextMessage("Đăng ký tài khoản thành công!");
           setOpenMessage(true);
@@ -351,7 +356,7 @@ const AppBar = () => {
         },
         withCredentials: true
       })
-      if (response.data.message === "Logged out successfully") {
+      if (response.data.code === 0) {
         dispatch(logoutSuccess())
         setTypeMessage("success");
         setTextMessage("Đăng xuất thành công!");
@@ -667,6 +672,7 @@ const AppBar = () => {
                             {...registerFormSignUp('signUpName',
                               {
                                 required: "Vui lòng nhập thông tin!",
+                                validate: checkSignUpName
                               }
                             )}
                             id="signUpName"

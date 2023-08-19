@@ -1,3 +1,4 @@
+import React from 'react';
 import '../../App.scss'
 import AppBar from '../../components/appbar_header';
 import Banner from '../../components/banner';
@@ -10,7 +11,7 @@ import HomeUtils from '../../components/home_utils';
 import KnowledgeView from '../../components/knowledge_view';
 import NavBar from '../../components/navbar_header';
 
-export default function HomePage() {
+const HomePage: React.FC = () => {
   return (
     <>
       <AppBar />
@@ -26,4 +27,6 @@ export default function HomePage() {
     </>
   );
 }
+
+export default HomePage
 

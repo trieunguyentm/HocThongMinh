@@ -1,5 +1,5 @@
 import React from 'react'
-import './styles.css'
+import './styles.scss'
 import SwiperHomeUtils from './SwiperHomeUtils'
 
 const HomeUtils: React.FC = () => {
